@@ -28,3 +28,7 @@ test:
   <<: *default
   database: nur_test
 
+production: 
+  <<: *default
+  username: bfebf81cb41de8
+  password: 6551ef69
