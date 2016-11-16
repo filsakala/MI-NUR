@@ -1,7 +1,0 @@
-I"h(function() {
-  jQuery(function() {
-    return $('.ui.dropdown').dropdown();
-  });
-
-}).call(this);
-:ET

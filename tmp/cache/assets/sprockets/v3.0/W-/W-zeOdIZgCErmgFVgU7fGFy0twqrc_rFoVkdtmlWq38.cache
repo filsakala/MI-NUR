@@ -1,8 +1,0 @@
-I"„(function() {
-  jQuery(function() {
-    $('.ui.dropdown').dropdown();
-    return $('.datatable').DataTable();
-  });
-
-}).call(this);
-:ET
