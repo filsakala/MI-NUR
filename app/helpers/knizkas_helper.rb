@@ -1,0 +1,2 @@
+module KnizkasHelper
+end

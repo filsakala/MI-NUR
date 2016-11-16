@@ -1,0 +1,123 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section"><%= @kolo.rocnik %>. ročník</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section"><%= @kolo.seria %> séria</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section"><%= @kolo.cislo %>. kolo</div>
+  </div>
+</div>
+
+<span id="notice"><%= notice %></span>
+
+<h1><%= @kolo.cislo %>. kolo</h1>
+<h2>Príklady v zadaniach</h2>
+
+<div class="ui two column grid">
+  <div class="column">
+    <h3>Vybrané príklady</h3>
+    <table class="ui teal selectable celled striped table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>č.</th>
+        <th>Názov</th>
+        <th>Akcie</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% (1..9).each do |c| %>
+          <% p = @kolo.priklads.where(cislo_v_kole: c).take %>
+          <% if p %>
+              <tr>
+                <td></td>
+                <td><%= c %></td>
+                <td><%= p.nazov %></td>
+                <td>
+                  <%= link_to p do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+                  <%= link_to edit_priklad_path(p) do %>
+                      <i class="edit link icon"></i>
+                  <% end %>
+                  <%= link_to nil, data: { confirm: 'Are you sure?' } do %>
+                      <i class="remove link icon"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% else %>
+              <tr>
+                <td></td>
+                <td><%= c %></td>
+                <td></td>
+                <td></td>
+              </tr>
+          <% end %>
+      <% end %>
+      <% @kolo.priklads.order(:cislo_v_kole).each do |priklad| %>
+          <tr>
+            <td><%= priklad.nazov %></td>
+            <td><%= priklad.autor %></td>
+            <td><%= priklad.kategoria %></td>
+            <td><%= priklad.stav %></td>
+            <td>?</td>
+            <td><%= datetime_format priklad.updated_at %></td>
+            <td>
+              <%= link_to priklad do %>
+                  <i class="unhide link icon"></i>
+              <% end %>
+              <%= link_to edit_priklad_path(priklad) do %>
+                  <i class="edit link icon"></i>
+              <% end %>
+              <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="remove link icon"></i>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="column">
+    <h3>Výber z príkladov</h3>
+    <table class="ui fluid teal selectable celled striped table datatable">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Kategória</th>
+        <th>Stav</th>
+        <th>Akcie</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @priklads.each do |priklad| %>
+          <tr>
+            <td></td>
+            <td><%= priklad.nazov %></td>
+            <td><%= priklad.autor %></td>
+            <td><%= priklad.kategoria %></td>
+            <td><%= priklad.stav %></td>
+            <td>
+              <%= link_to priklad do %>
+                  <i class="unhide link icon"></i>
+              <% end %>
+              <%= link_to edit_priklad_path(priklad) do %>
+                  <i class="edit link icon"></i>
+              <% end %>
+              <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="remove link icon"></i>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

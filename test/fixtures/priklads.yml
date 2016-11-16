@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nazov: MyString
+  text: MyString
+  pred_t: MyString
+  po_t: MyString
+  vzorak: MyString
+  autor: MyString
+  kategoria: MyString
+  stav: MyString
+
+two:
+  nazov: MyString
+  text: MyString
+  pred_t: MyString
+  po_t: MyString
+  vzorak: MyString
+  autor: MyString
+  kategoria: MyString
+  stav: MyString

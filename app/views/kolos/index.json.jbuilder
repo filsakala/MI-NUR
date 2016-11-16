@@ -1,0 +1,1 @@
+json.array! @kolos, partial: 'kolos/kolo', as: :kolo

@@ -1,0 +1,1 @@
+json.partial! "rocniks/rocnik", rocnik: @rocnik

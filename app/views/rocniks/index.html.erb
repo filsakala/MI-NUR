@@ -1,0 +1,35 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Ročníky</div>
+  </div>
+</div>
+
+<span id="notice"><%= notice %></span>
+
+<h1>19. ročník, 2016/2017</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cislo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rocniks.each do |rocnik| %>
+      <tr>
+        <td><%= rocnik.cislo %></td>
+        <td><%= link_to 'Show', rocnik %></td>
+        <td><%= link_to 'Edit', edit_rocnik_path(rocnik) %></td>
+        <td><%= link_to 'Destroy', rocnik, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rocnik', new_rocnik_path %>

@@ -1,0 +1,61 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section"><%= @rocnik.cislo %>. ročník</div>
+  </div>
+</div>
+
+<span id="notice"><%= notice %></span>
+
+<div class="ui grid">
+  <div class="eight wide column">
+    <h1><%= @rocnik.cislo %>. ročník, <%= @rocnik.cislo + 1997 %>
+      /<%= @rocnik.cislo + 1998 %></h1>
+  </div>
+  <div class="eight wide right aligned column">
+    <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value" class="field">
+      <option value="/rocniks/<%= @rocnik.id %>">Zmeniť ročník</option>
+      <% Rocnik.order('cislo DESC').each do |r| %>
+          <option value="/rocniks/<%= r.id %>"><%= r.name %></option>
+      <% end %>
+    </select>
+    <%= link_to new_rocnik_path, data: { confirm: 'Naozaj chceš pridať ročník?' } do %>
+        <i class="ui big right aligned green plus circle link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="ui two column grid">
+  <div class="column">
+    <h2>Zimná séria</h2>
+    <h3>Knižky<%= link_to nil do %>
+          <i class="ui right aligned green plus circle link icon"></i>
+      <% end %>
+    </h3>
+    <h3>Kolá</h3>
+    <div class="ui list">
+      <% @kola_z.each do |kolo| %>
+          <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+      <% end %>
+    </div>
+
+    <h3>Riešitelia</h3>
+    <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+  </div>
+  <div class="column">
+    <h2>Letná séria</h2>
+    <h3>Knižky<%= link_to nil do %>
+          <i class="ui right aligned green plus circle link icon"></i>
+      <% end %>
+    </h3>
+    <h3>Kolá</h3>
+    <div class="ui list">
+      <% @kola_l.each do |kolo| %>
+          <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+      <% end %>
+    </div>
+    <h3>Riešitelia</h3>
+    <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+  </div>
+</div>

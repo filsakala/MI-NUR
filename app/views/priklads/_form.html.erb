@@ -1,0 +1,42 @@
+<%= form_for(@priklad, html: { class: 'ui form' }) do |f| %>
+    <% if @priklad.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@priklad.errors.count, "error") %> prohibited this
+            priklad from being saved:</h2>
+
+          <ul>
+            <% @priklad.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <br>
+    <div class="field">
+      <%= f.label :nazov, 'Názov' %>
+      <%= f.text_field :nazov %>
+    </div>
+    <div class="field">
+      <%= f.label :autor %>
+      <%= f.select :autor, options_for_select(['Filip', 'Barbora', 'Kubo', 'Gege'], @priklad.autor), include_blank: true %>
+    </div>
+    <div class="field">
+      <%= f.label :kategoria, "Kategória" %>
+      <%= f.select :kategoria, options_for_select(['Séria', 'Náboj'], @priklad.kategoria), include_blank: true %>
+    </div>
+    <div class="field">
+      <%= f.label :stav %>
+      <%= f.select :stav, options_for_select(['nepozretý', 'vhodný', 'použitý', 'vyradený'], @priklad.stav), include_blank: true %>
+    </div>
+    <div class="field">
+      <%= f.label :text %>
+      <%= f.text_area :text %>
+    </div>
+    <div class="field">
+      <%= f.label :vzorak, "Vzorové riešenie" %>
+      <%= f.text_area :vzorak %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Uložiť", class: 'ui green button' %>
+    </div>
+<% end %>

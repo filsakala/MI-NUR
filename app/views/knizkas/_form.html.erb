@@ -1,0 +1,17 @@
+<%= form_for(@knizka) do |f| %>
+  <% if @knizka.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@knizka.errors.count, "error") %> prohibited this knizka from being saved:</h2>
+
+      <ul>
+      <% @knizka.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

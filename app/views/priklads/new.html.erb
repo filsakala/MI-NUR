@@ -1,0 +1,21 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section">Príklady</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Nový príklad</div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Nový príklad</h1></div>
+  <div class="column">
+    <%= link_to priklads_path do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'form' %>
+

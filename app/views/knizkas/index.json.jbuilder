@@ -1,0 +1,1 @@
+json.array! @knizkas, partial: 'knizkas/knizka', as: :knizka

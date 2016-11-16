@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Riešky IS</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="ui raised segment container" style="background-image:url(<%= image_path "back.jpg" %>);">
+  <%= link_to (image_tag "logo.png"), root_path %>
+</div>
+<div class="ui raised segment container" style="background-color: white;">
+  <% if params[:notice] == 'passwd' %>
+      <% if !params[:email].blank? %>
+          <div class="ui green icon message">
+            <i class="inbox icon"></i>
+            <div class="content">
+              <div class="header">
+                Žiadosť o zaslanie nového hesla bola odoslaná.
+              </div>
+              <p>Skontroluj svoju e-mailovú schránku <%= params[:email] %>.</p>
+            </div>
+          </div>
+      <% else %>
+          <div class="ui red icon message">
+            <i class="inbox icon"></i>
+            <div class="content">
+              <div class="header">
+                Nastala chyba pri posielaní žiadosti o zaslanie hesla.
+              </div>
+              <p>Nezadal si e-mail.</p>
+            </div>
+          </div>
+      <% end %>
+  <% elsif params[:notice] == 'login' %>
+      <% if params[:username] != 'user' || params[:pass] != 'user' %>
+          <div class="ui red icon message">
+            <i class="user icon"></i>
+            <div class="content">
+              <div class="header">
+                Zadané meno a heslo sa nezhodujú.
+              </div>
+              <p>Skontroluj zadávané údaje a skús to znova.</p>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+
+  <h1>Informačný systém</h1>
+
+  <div class="ui two column grid">
+    <div class="column">
+      <div class="ui segment" style="min-height: 280px;">
+        <h2>Prihlasovanie</h2>
+        <%= form_tag url_for(:controller => 'homepages', :action => 'login'), class: 'ui form', method: :get do %>
+            <%= hidden_field_tag :notice, "login" %>
+            <div class="field">
+              <label>Prihlasovacie meno</label>
+              <%= text_field_tag 'username' %>
+            </div>
+            <div class="field">
+              <label>Heslo</label>
+              <%= password_field_tag 'pass' %>
+            </div>
+            <%= submit_tag "Prihlásiť sa", class: 'ui right floated green button' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui segment" style="min-height: 280px;">
+        <h2>Zabudnuté heslo</h2>
+        <%= form_tag url_for(:controller => 'homepages', :action => 'login'), class: 'ui form', method: :get do %>
+            <%= hidden_field_tag :notice, "passwd" %>
+            <div class="field">
+              <label>E-mail</label>
+              <%= email_field_tag :email %>
+            </div>
+            <%= submit_tag "Odoslať", class: 'ui right floated blue button' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

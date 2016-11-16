@@ -1,0 +1,1 @@
+json.array! @priklads, partial: 'priklads/priklad', as: :priklad

@@ -1,0 +1,58 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Príklady</div>
+  </div>
+</div>
+
+<span id="notice"><%= notice %></span>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Príklady</h1></div>
+  <div class="column">
+
+    <%= link_to new_priklad_path do %>
+        <i class="ui big right aligned green plus circle link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<table class="ui teal selectable celled striped table datatable">
+  <thead>
+  <tr>
+    <th>Názov</th>
+    <th>Autor</th>
+    <th>Kategória</th>
+    <th>Stav</th>
+    <th>Komentáre</th>
+    <th>Upravené</th>
+    <th>Akcie</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @priklads.each do |priklad| %>
+      <tr>
+        <td><%= priklad.nazov %></td>
+        <td><%= priklad.autor %></td>
+        <td><%= priklad.kategoria %></td>
+        <td><%= priklad.stav %></td>
+        <td><%= priklad.komentars.count %></td>
+        <td><%= datetime_format priklad.updated_at %></td>
+        <td>
+          <%= link_to priklad do %>
+              <i class="unhide link icon"></i>
+          <% end %>
+          <%= link_to edit_priklad_path(priklad) do %>
+              <i class="edit link icon"></i>
+          <% end %>
+          <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="remove link icon"></i>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+

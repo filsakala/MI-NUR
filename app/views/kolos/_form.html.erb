@@ -1,0 +1,21 @@
+<%= form_for(@kolo) do |f| %>
+  <% if @kolo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kolo.errors.count, "error") %> prohibited this kolo from being saved:</h2>
+
+      <ul>
+      <% @kolo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cislo %><br>
+    <%= f.number_field :cislo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Riešky IS</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="ui raised segment container" style="background-image:url(<%= image_path "back.jpg" %>);">
+  <div class="ui grid">
+    <div class="fourteen wide column">
+      <%= link_to (image_tag "logo.png"), homepages_path %>
+    </div>
+    <div class="two wide column">
+      <%= link_to login_homepages_path, data: { confirm: 'Naozaj sa chceš odhlásiť?' } do %>
+          <i class="ui big circular inverted pink sign out link icon"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="ui raised segment container" style="background-color: white; ">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="three wide column">
+        <div class="ui fluid vertical menu">
+          <%= link_to priklads_path, class: 'item' do %>
+              <i class="gamepad icon"></i>
+              Príklady
+          <% end %>
+          <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'item' do %>
+              <i class="help icon"></i>
+              Riešitelia
+          <% end %>
+          <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'item' do %>
+              <i class="help icon"></i>
+              Organizátori
+          <% end %>
+          <% if Rocnik.all.count > 0 %>
+              <% r = Rocnik.all.order('cislo DESC').first %>
+              <%= link_to r, class: 'ui item' do %>
+                  <i class="help icon"></i>
+                  <%= r.cislo %>. ročník
+              <% end %>
+          <% else %>
+              <%= link_to rocniks_path, class: 'ui item' do %>
+                  <i class="help icon"></i>
+                  Ročníky
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="twelve wide column">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

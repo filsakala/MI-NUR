@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Kolos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cislo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kolos.each do |kolo| %>
+      <tr>
+        <td><%= kolo.cislo %></td>
+        <td><%= link_to 'Show', kolo %></td>
+        <td><%= link_to 'Edit', edit_kolo_path(kolo) %></td>
+        <td><%= link_to 'Destroy', kolo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kolo', new_kolo_path %>

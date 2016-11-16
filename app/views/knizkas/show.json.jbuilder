@@ -1,0 +1,1 @@
+json.partial! "knizkas/knizka", knizka: @knizka

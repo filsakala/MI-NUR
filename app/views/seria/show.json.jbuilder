@@ -1,0 +1,1 @@
+json.partial! "seria/serium", serium: @serium

@@ -1,0 +1,27 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section">Príklady</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section">Príklad</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Upraviť</div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Upraviť príklad <%= @priklad.nazov %></h1></div>
+  <div class="column">
+    <%= link_to priklads_path do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+  <div class="column">
+    <%= link_to @priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="ui big right aligned remove link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'form' %>

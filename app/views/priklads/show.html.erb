@@ -1,0 +1,60 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <a class="section">Home</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section">Príklady</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Príklad</div>
+  </div>
+</div>
+
+<span id="notice"><%= notice %></span>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Príklad <%= @priklad.nazov %></h1></div>
+  <div class="column">
+    <%= link_to edit_priklad_path(@priklad) do %>
+        <i class="ui big right aligned edit link icon"></i>
+    <% end %>
+  </div>
+  <div class="column">
+    <%= link_to @priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="ui big right aligned remove link icon"></i>
+    <% end %>
+  </div>
+</div>
+<h4>Autor: <%= @priklad.autor %>, v kategórii <%= @priklad.kategoria %>, v
+  stave <%= @priklad.stav %>, naposledy
+  upravený <%= datetime_format @priklad.updated_at %></h4>
+
+<strong>Text:</strong>
+<p><%= @priklad.text %></p>
+
+<strong>Riešenie:</strong>
+<p><%= @priklad.vzorak %></p>
+
+<div class="ui comments">
+  <h3 class="ui dividing header">Komentáre</h3>
+  <% @priklad.komentars.each do |k| %>
+      <div class="comment">
+        <div class="content">
+          <a class="author"><%= k.autor %></a>
+          <div class="metadata">
+            <span class="date"><%= datetime_format k.created_at %></span>
+          </div>
+          <div class="text">
+            <%= k.text %>
+          </div>
+          <div class="actions">
+            <%= link_to "Vymazať", k, method: :delete, data: { confirm: 'Are you sure?' }, class: 'reply' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <% @priklad.komentars.new %>
+  <%= form_for @priklad.komentars.new, html: { class: 'ui form' } do |f| %>
+      <%= f.hidden_field :priklad_id, value: @priklad.id %>
+      <%= f.text_area :text %>
+      <%= f.submit 'Komentovať', class: 'ui blue submit button' %>
+  <% end %>
+</div>
