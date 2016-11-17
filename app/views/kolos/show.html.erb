@@ -1,16 +1,56 @@
 <div class="ui fluid segment">
   <div class="ui breadcrumb">
-    <a class="section">Home</a>
+    <%= link_to "Home", homepages_path, class: 'section' %>
     <i class="right chevron icon divider"></i>
-    <a class="section"><%= @kolo.rocnik %>. ročník</a>
+    <%= link_to "#{@kolo.rocnik}. ročník", rocnik_path(Rocnik.find_by_cislo(@kolo.rocnik)), class: 'section' %>
     <i class="right chevron icon divider"></i>
-    <a class="section"><%= @kolo.seria %> séria</a>
+    <div class="section"><%= @kolo.seria %> séria</div>
     <i class="right chevron icon divider"></i>
     <div class="active section"><%= @kolo.cislo %>. kolo</div>
   </div>
 </div>
 
-<span id="notice"><%= notice %></span>
+<% if notice == 'ok' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Príklady boli úspešne pridané do zadaní.
+        </div>
+        <p>Teraz môžeš upraviť ich poradie.</p>
+      </div>
+    </div>
+<% elsif notice == 'too_many_priklads' %>
+    <div class="ui red icon message">
+      <i class="meh icon"></i>
+      <div class="content">
+        <div class="header">
+          Nastala chyba pri pridávaní príkladov do zadaní.
+        </div>
+        <p>V zadaniach by po pridaní bolo viac ako 10 príkladov.</p>
+      </div>
+    </div>
+<% elsif notice == 'deleted' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Príklad bol úspešne odobraný.
+        </div>
+        <p>Teraz môžeš pridať ďalší príklad do zadaní.</p>
+      </div>
+    </div>
+<% elsif notice == 'no_priklads' %>
+    <div class="ui red icon message">
+      <i class="meh icon"></i>
+      <div class="content">
+        <div class="header">
+          Nastala chyba pri pridávaní príkladov do zadaní.
+        </div>
+        <p>Nevybral si žiadny príklad.</p>
+      </div>
+    </div>
+<% end %>
 
 <h1><%= @kolo.cislo %>. kolo</h1>
 <h2>Príklady v zadaniach</h2>
@@ -33,17 +73,24 @@
           <% p = @kolo.priklads.where(cislo_v_kole: c).take %>
           <% if p %>
               <tr>
-                <td></td>
-                <td><%= c %></td>
-                <td><%= p.nazov %></td>
                 <td>
+                  <% if c != 1 %>
+                      <i class="caret up link icon move_up" id="up<%= c %>"></i>
+                  <% end %>
+                  <% if c != 10 %>
+                      <i class="caret down link icon move_down" id="down<%= c %>"></i>
+                  <% end %>
+                </td>
+                <td><%= c %></td>
+                <td id="prikladN<%= c %>"><%= p.nazov %></td>
+                <td id="prikladA<%= c %>">
                   <%= link_to p do %>
                       <i class="unhide link icon"></i>
                   <% end %>
                   <%= link_to edit_priklad_path(p) do %>
                       <i class="edit link icon"></i>
                   <% end %>
-                  <%= link_to nil, data: { confirm: 'Are you sure?' } do %>
+                  <%= link_to remove_priklad_kolo_path(@kolo, c), method: :delete, data: { confirm: 'Naozaj chceš odobrať tento príklad zo zadaní?' } do %>
                       <i class="remove link icon"></i>
                   <% end %>
                 </td>
@@ -57,67 +104,46 @@
               </tr>
           <% end %>
       <% end %>
-      <% @kolo.priklads.order(:cislo_v_kole).each do |priklad| %>
-          <tr>
-            <td><%= priklad.nazov %></td>
-            <td><%= priklad.autor %></td>
-            <td><%= priklad.kategoria %></td>
-            <td><%= priklad.stav %></td>
-            <td>?</td>
-            <td><%= datetime_format priklad.updated_at %></td>
-            <td>
-              <%= link_to priklad do %>
-                  <i class="unhide link icon"></i>
-              <% end %>
-              <%= link_to edit_priklad_path(priklad) do %>
-                  <i class="edit link icon"></i>
-              <% end %>
-              <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                  <i class="remove link icon"></i>
-              <% end %>
-            </td>
-          </tr>
-      <% end %>
       </tbody>
     </table>
 
   </div>
   <div class="column">
     <h3>Výber z príkladov</h3>
-    <table class="ui teal selectable celled striped very compact small table">
-      <thead>
-      <tr>
-        <th class="one wide"></th>
-        <th class="four wide">Názov</th>
-        <th class="three wide">Autor</th>
-        <th class="two wide">Kategória</th>
-        <th class="two wide">Stav</th>
-        <th class="four wide">Akcie</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @priklads.each do |priklad| %>
+    <%= form_tag url_for(:controller => 'kolos', :action => 'add_priklads'), class: 'ui form' do %>
+        <table class="ui teal selectable celled striped very compact small table datatable">
+          <thead>
           <tr>
-            <td></td>
-            <td><%= priklad.nazov %></td>
-            <td><%= priklad.autor %></td>
-            <td><%= priklad.kategoria %></td>
-            <td><%= priklad.stav %></td>
-            <td>
-              <%= link_to priklad do %>
-                  <i class="unhide link icon"></i>
-              <% end %>
-              <%= link_to edit_priklad_path(priklad) do %>
-                  <i class="edit link icon"></i>
-              <% end %>
-              <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                  <i class="remove link icon"></i>
-              <% end %>
-            </td>
+            <th class="one wide"></th>
+            <th class="four wide">Názov</th>
+            <th class="three wide">Autor</th>
+            <th class="two wide">Kategória</th>
+            <th class="two wide">Stav</th>
+            <th class="four wide">Akcie</th>
           </tr>
-      <% end %>
-      </tbody>
-    </table>
+          </thead>
+
+          <tbody>
+          <% @priklads.each do |priklad| %>
+              <tr>
+                <td><%= check_box_tag "priklads[]", priklad.id %></td>
+                <td><%= priklad.nazov %></td>
+                <td><%= priklad.autor %></td>
+                <td><%= priklad.kategoria %></td>
+                <td><%= priklad.stav %></td>
+                <td>
+                  <%= link_to priklad do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+                  <%= link_to edit_priklad_path(priklad) do %>
+                      <i class="edit link icon"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= submit_tag "Vyber príklady", class: 'ui green button' %>
+    <% end %>
   </div>
 </div>

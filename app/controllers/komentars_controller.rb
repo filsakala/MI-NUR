@@ -29,7 +29,7 @@ class KomentarsController < ApplicationController
 
     respond_to do |format|
       if @komentar.save
-        format.html { redirect_to :back, notice: 'Komentar was successfully created.' }
+        format.html { redirect_to :back, notice: 'koment_add' }
         format.json { render :show, status: :created, location: @komentar }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class KomentarsController < ApplicationController
   def destroy
     @komentar.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Komentar was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'koment_delete' }
       format.json { head :no_content }
     end
   end

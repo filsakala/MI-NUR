@@ -1,12 +1,22 @@
 <div class="ui fluid segment">
   <div class="ui breadcrumb">
-    <a class="section">Home</a>
+    <%= link_to "Home", homepages_path, class: 'section' %>
     <i class="right chevron icon divider"></i>
     <div class="active section">Príklady</div>
   </div>
 </div>
 
-<span id="notice"><%= notice %></span>
+<% if notice == 'priklad_delete' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Príklad bol úspešne odobraný.
+        </div>
+        <p>Teraz môžeš pridať ďalšie príklady.</p>
+      </div>
+    </div>
+<% end %>
 
 <div class="ui grid">
   <div class="fourteen wide column"><h1>Príklady</h1></div>
@@ -47,7 +57,7 @@
           <%= link_to edit_priklad_path(priklad) do %>
               <i class="edit link icon"></i>
           <% end %>
-          <%= link_to priklad, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to priklad, method: :delete, data: { confirm: 'Naozaj chceš vymazať príklad?' } do %>
               <i class="remove link icon"></i>
           <% end %>
         </td>

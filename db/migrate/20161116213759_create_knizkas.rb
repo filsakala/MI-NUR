@@ -3,6 +3,7 @@ class CreateKnizkas < ActiveRecord::Migration
     create_table :knizkas do |t|
       t.integer :rocnik
       t.string :seria
+      t.integer :cislo
       
       t.timestamps null: false
     end

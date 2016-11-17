@@ -1,0 +1,59 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@knizka.rocnik}. ročník", rocnik_path(Rocnik.find_by_cislo(@knizka.rocnik)), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= @knizka.seria %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@knizka.cislo}. knižka", @knizka, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Zadania</div>
+  </div>
+</div>
+
+<% if notice == 'priklad_edited' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Zadania boli úspešne upravené
+        </div>
+        <p>Skontroluj svoje zmeny.</p>
+      </div>
+    </div>
+<% end %>
+
+<h1>Zadania <%= @c_kolo %>. kola</h1>
+
+<table class="ui teal selectable celled striped very compact small table" style="border-collapse:collapse;">
+  <tbody>
+  <% @priklady.each do |pr| %>
+      <tr>
+        <td class="two wide column" rowspan="3" style="border-bottom: 2pt solid black;">
+          <span class="ui label">Príklad <%= pr.cislo_v_kole %></span>
+          <%= link_to 'Upraviť', edit_priklad_priklad_path(pr, @obsah), class: 'ui yellow button' %>
+        </td>
+        <td>
+          <div class="ui teal label">Text pred príkladom</div>
+          <br>
+          <%= pr.pred_t %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui teal label">Text príkladu</div>
+          <br>
+          <%= pr.text %>
+        </td>
+      </tr>
+      <tr>
+        <td style="border-bottom: 2pt solid black;">
+          <div class="ui teal label">Text po príklade</div>
+          <br>
+          <%= pr.po_t %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

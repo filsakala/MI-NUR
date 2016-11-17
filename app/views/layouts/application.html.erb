@@ -40,12 +40,12 @@
           <% if Rocnik.all.count > 0 %>
               <% r = Rocnik.all.order('cislo DESC').first %>
               <%= link_to r, class: 'ui item' do %>
-                  <i class="help icon"></i>
+                  <i class="wait icon"></i>
                   <%= r.cislo %>. ročník
               <% end %>
           <% else %>
               <%= link_to rocniks_path, class: 'ui item' do %>
-                  <i class="help icon"></i>
+                  <i class="wait icon"></i>
                   Ročníky
               <% end %>
           <% end %>

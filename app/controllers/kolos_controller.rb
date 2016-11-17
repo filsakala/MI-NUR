@@ -1,5 +1,5 @@
 class KolosController < ApplicationController
-  before_action :set_kolo, only: [:show, :edit, :update, :destroy]
+  before_action :set_kolo, only: [:show, :edit, :update, :destroy, :add_priklads, :remove_priklad]
 
   # GET /kolos
   # GET /kolos.json
@@ -11,6 +11,42 @@ class KolosController < ApplicationController
   # GET /kolos/1.json
   def show
     @priklads = Priklad.where(kolo_id: nil)
+  end
+
+  def add_priklads
+    pr_cnt = @kolo.priklads.count
+
+    unless params[:priklads].blank?
+      if params[:priklads].size + pr_cnt > 10
+        redirect_to :back, notice: 'too_many_priklads'
+      else
+        params[:priklads].each do |p|
+          priklad = Priklad.find(p)
+          new_cislo = 0
+          (1..10).each do |c|
+            unless @kolo.priklads.where(cislo_v_kole: c).take
+              new_cislo = c
+              break
+            end
+          end
+          if new_cislo != 0
+            priklad.update(kolo: @kolo, cislo_v_kole: new_cislo)
+          end
+        end
+
+        redirect_to :back, notice: 'ok'
+      end
+    else
+      redirect_to :back, notice: 'no_priklads'
+    end
+  end
+
+  def remove_priklad
+    ps = @kolo.priklads.where(cislo_v_kole: params[:format])
+    ps.each do |p|
+      p.update(kolo: nil, cislo_v_kole: nil)
+    end
+    redirect_to :back, notice: 'deleted'
   end
 
   # GET /kolos/new
@@ -63,13 +99,13 @@ class KolosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kolo
-      @kolo = Kolo.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_kolo
+    @kolo = Kolo.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def kolo_params
-      params.require(:kolo).permit(:cislo, :rocnik, :seria)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def kolo_params
+    params.require(:kolo).permit(:cislo, :rocnik, :seria)
+  end
 end

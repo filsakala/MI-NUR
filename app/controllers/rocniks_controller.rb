@@ -12,12 +12,16 @@ class RocniksController < ApplicationController
   def show
     @kola_z = Kolo.where(rocnik: @rocnik.cislo, seria: 'Zimná').order(:cislo)
     @kola_l = Kolo.where(rocnik: @rocnik.cislo, seria: 'Letná').order(:cislo)
+    @seria_z = Serium.where(rocnik: @rocnik.cislo, nazov: 'Zimná').take
+    @seria_l = Serium.where(rocnik: @rocnik.cislo, nazov: 'Letná').take
+    @knizky_z = Knizka.where(rocnik: @rocnik.cislo, seria: 'Zimná').order(:cislo)
+    @knizky_l = Knizka.where(rocnik: @rocnik.cislo, seria: 'Letná').order(:cislo)
   end
 
   # GET /rocniks/new
   def new
     max = Rocnik.order('cislo DESC').first
-    redirect_to Rocnik.create(cislo: max.cislo + 1)
+    redirect_to Rocnik.create(cislo: max.cislo + 1), notice: 'rocnik_added'
   end
 
   # GET /rocniks/1/edit

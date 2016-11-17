@@ -7,6 +7,6 @@ module ApplicationHelper
 
   def datetime_format(datetime)
     return "" if !datetime
-    datetime.strftime("%d.%m.%Y %H:%m")
+    datetime.strftime("%d.%m.%Y %H:%M")
   end
 end

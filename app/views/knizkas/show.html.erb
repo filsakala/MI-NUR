@@ -1,4 +1,191 @@
-<p id="notice"><%= notice %></p>
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@knizka.rocnik}. ročník", rocnik_path(Rocnik.find_by_cislo(@knizka.rocnik)), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= @knizka.seria %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <div class="active section"><%= @knizka.cislo %>. knižka</div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_knizka_path(@knizka) %> |
-<%= link_to 'Back', knizkas_path %>
+<% if notice == 'ok' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Obsah bol úspešne pridaný do knižky.
+        </div>
+        <p>Skontroluj svoje zmeny.</p>
+      </div>
+    </div>
+<% elsif notice == 'nothing_added' %>
+    <div class="ui red icon message">
+      <i class="meh mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Nepodarilo sa pridať obsah do tejto knižky.
+        </div>
+        <p>Nevybral si, čo sa má pridať.</p>
+      </div>
+    </div>
+<% elsif notice == 'removed' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Obsah bol z knižky úspešne odobraný.
+        </div>
+        <p>Skontroluj svoje zmeny.</p>
+      </div>
+    </div>
+<% elsif notice == 'pdf_ok' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          PDF bolo úspešne vytvorené.
+        </div>
+        <p>Teraz si ho môžeš prezerať.</p>
+      </div>
+    </div>
+<% end %>
+
+<h1><%= @knizka.cislo %>. knižka</h1>
+<h2>Obsah knižky</h2>
+
+<div class="ui two column grid">
+  <div class="column">
+    <h3>Vybraný obsah</h3>
+    <table class="ui teal selectable celled striped very compact small table">
+      <thead>
+      <tr>
+        <th class="one wide"></th>
+        <th class="one wide">Por.</th>
+        <th class="eight wide">Názov</th>
+        <th class="six wide">Akcie</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @knizka.knizka_obsahs.order(:cislo).each do |k| %>
+          <tr>
+            <td>
+              <% if k.cislo != 1 %>
+                  <i class="caret up link icon move_up" id="up<%= k.cislo %>"></i>
+              <% end %>
+              <% if k.cislo != @knizka.knizka_obsahs.count %>
+                  <i class="caret down link icon move_down" id="down<%= k.cislo %>"></i>
+              <% end %>
+            </td>
+            <td><%= k.cislo %>.</td>
+            <td id="prikladN<%= k.cislo %>"><%= k.nazov %></td>
+            <td id="prikladA<%= k.cislo %>">
+              <% if k.nazov.start_with?('Zadania') %>
+                  <%= link_to zadania_knizka_path(@knizka, k.id) do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+              <% elsif k.nazov.start_with?('Vzoráky') %>
+                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+              <% elsif k.nazov.start_with?('Výsledkovka') %>
+                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+              <% elsif k.nazov.start_with?('Článok') %>
+                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                      <i class="unhide link icon"></i>
+                  <% end %>
+                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                      <i class="edit link icon"></i>
+                  <% end %>
+              <% end %>
+
+              <%= link_to remove_obsah_knizka_path(@knizka, k.id), method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
+                  <i class="remove link icon"></i>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="column">
+    <h3>Výber obsahu</h3>
+    <%= form_tag url_for(:controller => 'knizkas', :action => 'add_obsah'), class: 'ui form' do %>
+        <table class="ui teal selectable celled striped very compact small table">
+          <thead>
+          <tr>
+            <th class="two wide"></th>
+            <th class="fourteen wide">Názov</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @obsah.each do |o| %>
+              <tr>
+                <td><%= check_box_tag "obsah[]", o[:id] %></td>
+                <td><%= o[:name] %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td></td>
+            <td>Iný článok -
+              počet: <%= number_field_tag :clanok_cnt %></td>
+          </tr>
+          </tbody>
+        </table>
+        <%= submit_tag "Pridať obsah", class: 'ui green button' %>
+    <% end %>
+  </div>
+</div>
+
+<h2>PDF</h2>
+
+<div class="ui segment">
+  <div class="ui two column grid">
+    <div class="four wide column">
+      <h3>Vytvorené PDF</h3>
+      <table class="ui teal selectable celled striped fluid table">
+        <thead>
+        <tr>
+          <th>Verzia</th>
+          <th class="one wide"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @knizka.pdfs.order('created_at DESC').each do |pdf| %>
+            <tr>
+              <td><%= datetime_format pdf.created_at %></td>
+              <td>
+                <i class="unhide link icon refresh"></i>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="ui segment">
+        <h3>Tvorba PDF</h3>
+        <%= form_tag url_for(:controller => 'knizkas', :action => 'gen_pdf'), class: 'ui form' do %>
+            <%= check_box_tag :print %> Na tlač<br>
+            <%= check_box_tag :logs %> Zachovať zdrojové súbory<br>
+            <%= check_box_tag :errors %> Tolerancia chýb<br>
+            <%= submit_tag "Vytvor PDF", class: 'ui green button' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="twelve wide column">
+      <h3>PDF Viewer</h3>
+      <% if @knizka.pdfs.count > 0 %>
+          <div class="ui embed" style="min-height: 800px;" id="refreshed">
+            <embed src="<%= asset_path "pdfs/knizka#{Random.rand(4) + 1230}.pdf" %>"/>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

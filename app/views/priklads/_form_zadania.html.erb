@@ -1,0 +1,31 @@
+<%= form_for(@priklad, :url => url_for(:controller => 'priklads', :action => "edit_priklad"), method: :patch, html: { class: 'ui form' }) do |f| %>
+    <% if @priklad.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@priklad.errors.count, "error") %> prohibited this
+            priklad from being saved:</h2>
+
+          <ul>
+            <% @priklad.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <br>
+    <%= hidden_field_tag :format, params[:format] %>
+    <div class="field">
+      <%= f.label :pred_t, 'Text pred príkladom' %>
+      <%= f.text_area :pred_t %>
+    </div>
+    <div class="field">
+      <%= f.label :text, 'Text príkladu' %>
+      <%= f.text_area :text %>
+    </div>
+    <div class="field">
+      <%= f.label :po_t, 'Text po príklade' %>
+      <%= f.text_area :po_t %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Uložiť", class: 'ui green button' %>
+    </div>
+<% end %>

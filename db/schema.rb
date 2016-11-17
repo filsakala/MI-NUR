@@ -11,11 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116154118) do
+ActiveRecord::Schema.define(version: 20161117143325) do
 
   create_table "homepages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "knizka_obsahs", force: :cascade do |t|
+    t.string   "nazov",      limit: 255
+    t.string   "text",       limit: 255
+    t.integer  "cislo",      limit: 4
+    t.integer  "knizka_id",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "knizka_obsahs", ["knizka_id"], name: "index_knizka_obsahs_on_knizka_id", using: :btree
+
+  create_table "knizkas", force: :cascade do |t|
+    t.integer  "rocnik",     limit: 4
+    t.string   "seria",      limit: 255
+    t.integer  "cislo",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "kolos", force: :cascade do |t|
@@ -36,19 +55,25 @@ ActiveRecord::Schema.define(version: 20161116154118) do
 
   add_index "komentars", ["priklad_id"], name: "index_komentars_on_priklad_id", using: :btree
 
+  create_table "pdfs", force: :cascade do |t|
+    t.integer  "knizka_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "priklads", force: :cascade do |t|
     t.string   "nazov",        limit: 255
-    t.string   "text",         limit: 255
-    t.string   "pred_t",       limit: 255
-    t.string   "po_t",         limit: 255
-    t.string   "vzorak",       limit: 255
+    t.string   "text",         limit: 2048
+    t.string   "pred_t",       limit: 2048
+    t.string   "po_t",         limit: 2048
+    t.string   "vzorak",       limit: 2048
     t.string   "autor",        limit: 255
     t.string   "kategoria",    limit: 255
     t.string   "stav",         limit: 255
     t.integer  "kolo_id",      limit: 4
     t.integer  "cislo_v_kole", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "priklads", ["kolo_id"], name: "index_priklads_on_kolo_id", using: :btree

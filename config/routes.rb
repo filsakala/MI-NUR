@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :knizkas
 
   resources :homepages do
     collection do
@@ -12,11 +11,35 @@ Rails.application.routes.draw do
 
   resources :komentars
 
-  resources :priklads
+  resources :priklads do
+    member do
+      get :edit_priklad
+      patch :edit_priklad
+    end
+  end
 
-  resources :kolos
+  resources :kolos do
+    member do
+      post :add_priklads
+      delete :remove_priklad
+    end
+  end
 
-  resources :seria
+  resources :knizkas do
+    member do
+      post :add_obsah
+      delete :remove_obsah
+      get :zadania
+      get :vzoraky
+      get :vysledkovka
+      get :clanok
+      post :gen_pdf
+    end
+  end
+
+  resources :seria do
+    resources :knizkas
+  end
 
   resources :rocniks
 

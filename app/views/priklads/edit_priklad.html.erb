@@ -1,0 +1,24 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@kolo.rocnik}. ročník", rocnik_path(Rocnik.find_by_cislo(@kolo.rocnik)), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= @kolo.seria %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Zadania #{@kolo.cislo}. kola", zadania_knizka_path(@zadania.knizka, @zadania), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Upraviť zadania</div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="fifteen wide column"><h1>Upraviť zadania - Príklad <%= @priklad.nazov %></h1></div>
+  <div class="column">
+    <%= link_to zadania_knizka_path(@zadania.knizka, @zadania) do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'form_zadania' %>
