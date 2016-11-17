@@ -18,18 +18,18 @@
 <div class="ui two column grid">
   <div class="column">
     <h3>Vybrané príklady</h3>
-    <table class="ui teal selectable celled striped table">
+    <table class="ui teal selectable celled striped very compact small table">
       <thead>
       <tr>
-        <th></th>
-        <th>č.</th>
-        <th>Názov</th>
-        <th>Akcie</th>
+        <th class="one wide"></th>
+        <th class="one wide">č.</th>
+        <th class="eight wide">Názov</th>
+        <th class="six wide">Akcie</th>
       </tr>
       </thead>
 
       <tbody>
-      <% (1..9).each do |c| %>
+      <% (1..10).each do |c| %>
           <% p = @kolo.priklads.where(cislo_v_kole: c).take %>
           <% if p %>
               <tr>
@@ -84,15 +84,15 @@
   </div>
   <div class="column">
     <h3>Výber z príkladov</h3>
-    <table class="ui fluid teal selectable celled striped table datatable">
+    <table class="ui teal selectable celled striped very compact small table">
       <thead>
       <tr>
-        <th></th>
-        <th>Názov</th>
-        <th>Autor</th>
-        <th>Kategória</th>
-        <th>Stav</th>
-        <th>Akcie</th>
+        <th class="one wide"></th>
+        <th class="four wide">Názov</th>
+        <th class="three wide">Autor</th>
+        <th class="two wide">Kategória</th>
+        <th class="two wide">Stav</th>
+        <th class="four wide">Akcie</th>
       </tr>
       </thead>
 

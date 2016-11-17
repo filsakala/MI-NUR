@@ -35,7 +35,7 @@
 
 <div class="ui comments">
   <h3 class="ui dividing header">Komentáre</h3>
-  <% @priklad.komentars.each do |k| %>
+  <% @priklad.komentars.order('created_at DESC').each do |k| %>
       <div class="comment">
         <div class="content">
           <a class="author"><%= k.autor %></a>
