@@ -60,7 +60,7 @@
         <% end %>
       </div>
       <div class="meta">
-        <%= @aktualna_knizka.rocnik %>. ročník, Letná séria
+        <%= @aktualny_rocnik.cislo %>. ročník, Letná séria
       </div>
     </div>
     <div class="extra content">
@@ -96,8 +96,8 @@
         Opravovanie
       </div>
       <div class="meta">
-        <%= @aktualna_knizka.rocnik %>.
-        ročník, <%= @aktualna_knizka.seria %> séria,
+        <%= @aktualny_rocnik.cislo %>.
+        ročník, Letná séria,
         1. kolo
       </div>
       <div class="description">
@@ -205,15 +205,20 @@
   </thead>
   <tbody>
   <tr>
-    <td>Barbora zmenila príklad <%= link_to Priklad.first.try(:nazov), Priklad.first %></td>
+    <td>Barbora zmenila
+      príklad <%= link_to Priklad.first.try(:nazov), Priklad.first %></td>
     <td>26.10.2016 21:15</td>
   </tr>
+  <% if !@aktualna_knizka.blank? %>
+      <tr>
+        <td>Jakub
+          zmenil <%= link_to "knižku #{@aktualna_knizka.cislo}", @aktualna_knizka %></td>
+        <td>26.10.2016 17:45</td>
+      </tr>
+  <% end %>
   <tr>
-    <td>Jakub zmenil <%= link_to "knižku #{@aktualna_knizka.cislo}", @aktualna_knizka %></td>
-    <td>26.10.2016 17:45</td>
-  </tr>
-  <tr>
-    <td>Marianna pridala body <%= link_to "opravovania", nil, data: { confirm: 'Not implemented.' } %></td>
+    <td>Marianna pridala
+      body <%= link_to "opravovania", nil, data: { confirm: 'Not implemented.' } %></td>
     <td>25.10.2016 13:15</td>
   </tr>
   </tbody>
