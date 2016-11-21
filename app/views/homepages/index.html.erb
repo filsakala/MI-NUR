@@ -1,13 +1,220 @@
-<h1>Homepage</h1>
+<h1>Aktuálne</h1>
 
-Hello World!
+<div class="ui three cards">
+  <% if @aktualna_knizka %>
+      <div class="card">
+        <div class="content">
+          <div class="header">
+            Knižka
+            <%= link_to knizka_path(@aktualna_knizka) do %>
+                <i class="unhide icon"></i>
+            <% end %>
+          </div>
+          <div class="meta">
+            <%= @aktualna_knizka.rocnik %>.
+            ročník, <%= @aktualna_knizka.seria %> séria,
+            <%= @aktualna_knizka.cislo %>. knižka
+          </div>
+          <div class="description">
+            <% if @aktualna_knizka.knizka_obsahs.count > 0 %>
+                <div class="ui list">
+                  <% @aktualna_knizka.knizka_obsahs.order(:cislo).each do |k| %>
+                      <div class="item">
+                        <%= k.nazov %>
+                        <% if k.nazov.start_with?('Zadania') %>
+                            <%= link_to zadania_knizka_path(@aktualna_knizka, k.id) do %>
+                                <i class="unhide link icon"></i>
+                            <% end %>
+                        <% elsif k.nazov.start_with?('Vzoráky') %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                                <i class="unhide link icon"></i>
+                            <% end %>
+                        <% elsif k.nazov.start_with?('Výsledkovka') %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                                <i class="unhide link icon"></i>
+                            <% end %>
+                        <% elsif k.nazov.start_with?('Článok') %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                                <i class="unhide link icon"></i>
+                            <% end %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                                <i class="edit link icon"></i>
+                            <% end %>
+                        <% end %>
+                      </div>
+                  <% end %>
+                </div>
+            <% else %>
+                Knižka zatiaľ nemá obsah.
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Ročník, séria
+        <%= link_to rocnik_path(@aktualny_rocnik) do %>
+            <i class="unhide icon"></i>
+        <% end %>
+      </div>
+      <div class="meta">
+        <%= @aktualna_knizka.rocnik %>. ročník, Letná séria
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="description">
+        <h3>Knižky</h3>
+        <div class="ui list">
+          <% @knizky_l.each do |k| %>
+              <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="description">
+        <h3>Kolá</h3>
+        <div class="ui list">
+          <% @kola_l.each do |kolo| %>
+              <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="description">
+        <h3>Riešitelia</h3>
+        <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Opravovanie
+      </div>
+      <div class="meta">
+        <%= @aktualna_knizka.rocnik %>.
+        ročník, <%= @aktualna_knizka.seria %> séria,
+        1. kolo
+      </div>
+      <div class="description">
+        <div class="ui fluid vertical inverted green buttons">
+          <%= link_to "Prihlás sa", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
+          <%= link_to "Zadaj body", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
+          <%= link_to "Napíš vzorák", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-Links:
-<ul>
-  <li><%= link_to 'Login page', login_homepages_path %></li>
-  <li><%= link_to 'Ročníky', rocniks_path %></li>
-  <li><%= link_to 'Kolá', kolos_path %></li>
-  <li><%= link_to 'Komentáre', komentars_path %></li>
-  <li><%= link_to 'Príklady', priklads_path %></li>
-  <li><%= link_to 'Série', seria_path %></li>
-</ul>
+<h1>Štatistiky</h1>
+
+<div class="ui three cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Knižka
+      </div>
+      <div class="meta">
+        Počet vykonaných zmien
+      </div>
+      <div class="description">
+        <div class="ui celled ordered list">
+          <div class="item">
+            <span class="ui teal circular right floated label">25</span>
+            Jakub
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">12</span>
+            Barbora
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">7</span>
+            Marianna
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Príklady
+      </div>
+      <div class="meta">
+        Počet pridaných príkladov
+      </div>
+      <div class="description">
+        <div class="ui celled ordered list">
+          <div class="item">
+            <span class="ui teal circular right floated label">52</span>
+            Jakub
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">28</span>
+            Barbora
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">21</span>
+            Marianna
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Opravovanie
+      </div>
+      <div class="meta">
+        Počet opravených príkladov
+      </div>
+      <div class="description">
+        <div class="ui celled ordered list">
+          <div class="item">
+            <span class="ui teal circular right floated label">8</span>
+            Jakub
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">5</span>
+            Barbora
+          </div>
+          <div class="item">
+            <span class="ui teal circular right floated label">3</span>
+            Marianna
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1>Aktivity</h1>
+
+<table class="ui teal selectable celled striped table">
+  <thead>
+  <tr>
+    <th>Aktivita</th>
+    <th>Čas</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Barbora zmenila príklad <%= link_to Priklad.first.nazov, Priklad.first %></td>
+    <td>26.10.2016 21:15</td>
+  </tr>
+  <tr>
+    <td>Jakub zmenil <%= link_to "knižku 1", @aktualna_knizka %></td>
+    <td>26.10.2016 17:45</td>
+  </tr>
+  <tr>
+    <td>Marianna pridala body <%= link_to "opravovania", nil, data: { confirm: 'Not implemented.' } %></td>
+    <td>25.10.2016 13:15</td>
+  </tr>
+  </tbody>
+</table>

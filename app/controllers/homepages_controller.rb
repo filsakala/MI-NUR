@@ -6,6 +6,10 @@ class HomepagesController < ApplicationController
   # GET /homepages.json
   def index
     @homepages = Homepage.all
+    @aktualny_rocnik = Rocnik.all.order('cislo DESC').first
+    @aktualna_knizka = Knizka.where(rocnik: @aktualny_rocnik.cislo).order('seria ASC').order('cislo DESC').first
+    @kola_l = Kolo.where(rocnik: @aktualny_rocnik.cislo, seria: 'Letná').order(:cislo)
+    @knizky_l = Knizka.where(rocnik: @aktualny_rocnik.cislo, seria: 'Letná').order(:cislo)
   end
 
   def login

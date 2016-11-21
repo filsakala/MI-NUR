@@ -33,9 +33,9 @@ class KnizkasController < ApplicationController
     @pridany_obsah = @knizka.knizka_obsahs
     @obsah = []
     (1..3).each do |i|
-      @obsah << { id: "z1", name: "Zadania #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Zadania #{i}. kola").count == 0
-      @obsah << { id: "vz1", name: "Vzoráky #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Vzoráky #{i}. kola").count == 0
-      @obsah << { id: "vy1", name: "Výsledkovka #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Výsledkovka #{i}. kola").count == 0
+      @obsah << { id: "z#{i}", name: "Zadania #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Zadania #{i}. kola").count == 0
+      @obsah << { id: "vz#{i}", name: "Vzoráky #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Vzoráky #{i}. kola").count == 0
+      @obsah << { id: "vy#{i}", name: "Výsledkovka #{i}. kola", link: nil } if @pridany_obsah.where(nazov: "Výsledkovka #{i}. kola").count == 0
     end
   end
 

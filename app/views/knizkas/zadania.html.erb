@@ -26,34 +26,60 @@
 
 <h1>Zadania <%= @c_kolo %>. kola</h1>
 
-<table class="ui teal selectable celled striped very compact small table" style="border-collapse:collapse;">
-  <tbody>
-  <% @priklady.each do |pr| %>
-      <tr>
-        <td class="two wide column" rowspan="3" style="border-bottom: 2pt solid black;">
-          <span class="ui label">Príklad <%= pr.cislo_v_kole %></span>
-          <%= link_to 'Upraviť', edit_priklad_priklad_path(pr, @obsah), class: 'ui yellow button' %>
-        </td>
-        <td>
-          <div class="ui teal label">Text pred príkladom</div>
-          <br>
-          <%= pr.pred_t %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="ui teal label">Text príkladu</div>
-          <br>
-          <%= pr.text %>
-        </td>
-      </tr>
-      <tr>
-        <td style="border-bottom: 2pt solid black;">
-          <div class="ui teal label">Text po príklade</div>
-          <br>
-          <%= pr.po_t %>
-        </td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% if @priklady.any? %>
+    <table class="ui teal selectable celled striped very compact small table" style="border-collapse:collapse;">
+      <tbody>
+      <% @priklady.each do |pr| %>
+          <tr>
+            <td class="two wide column" rowspan="3" style="border-bottom: 2pt solid black;">
+              <span class="ui label">Príklad <%= pr.cislo_v_kole %></span>
+              <%= link_to 'Upraviť', edit_priklad_priklad_path(pr, @obsah), class: 'ui yellow button' %>
+            </td>
+            <td>
+              <div class="ui teal label">Text pred príkladom</div>
+              <br>
+              <% if !pr.pred_t.blank? %>
+                  <%= pr.pred_t %>
+              <% else %>
+                  Nezadaný.
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ui teal label">Text príkladu</div>
+              <br>
+              <% if !pr.text.blank? %>
+                  <%= pr.text %>
+              <% else %>
+                  Nezadaný.
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td style="border-bottom: 2pt solid black;">
+              <div class="ui teal label">Text po príklade</div>
+              <br>
+              <% if !pr.po_t.blank? %>
+                  <%= pr.po_t %>
+              <% else %>
+                  Nezadaný.
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="ui yellow icon message">
+      <i class="info icon"></i>
+      <div class="content">
+        <div class="header">
+          Zadania neobsahujú žiadny príklad.
+        </div>
+        <p>Skús najprv nejaký pridať
+          v <%= link_to "kole", kolo_path(Kolo.where(rocnik: @knizka.rocnik, seria: @knizka.seria, cislo: @c_kolo).take) %>
+          .</p>
+      </div>
+    </div>
+<% end %>
