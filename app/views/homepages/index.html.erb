@@ -1,7 +1,7 @@
 <h1>Aktuálne</h1>
 
 <div class="ui three cards">
-  <% if @aktualna_knizka %>
+  <% if !@aktualna_knizka.blank? %>
       <div class="card">
         <div class="content">
           <div class="header">
@@ -205,7 +205,7 @@
   </thead>
   <tbody>
   <tr>
-    <td>Barbora zmenila príklad <%= link_to Priklad.first.nazov, Priklad.first %></td>
+    <td>Barbora zmenila príklad <%= link_to Priklad.first.try(:nazov), Priklad.first %></td>
     <td>26.10.2016 21:15</td>
   </tr>
   <tr>
