@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Riesitels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meno</th>
+      <th>Priezvisko</th>
+      <th>Adresa</th>
+      <th>Datum narodenia</th>
+      <th>Telefon</th>
+      <th>Telefon rodic</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @riesitels.each do |riesitel| %>
+      <tr>
+        <td><%= riesitel.meno %></td>
+        <td><%= riesitel.priezvisko %></td>
+        <td><%= riesitel.adresa %></td>
+        <td><%= riesitel.datum_narodenia %></td>
+        <td><%= riesitel.telefon %></td>
+        <td><%= riesitel.telefon_rodic %></td>
+        <td><%= riesitel.email %></td>
+        <td><%= link_to 'Show', riesitel %></td>
+        <td><%= link_to 'Edit', edit_riesitel_path(riesitel) %></td>
+        <td><%= link_to 'Destroy', riesitel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Riesitel', new_riesitel_path %>

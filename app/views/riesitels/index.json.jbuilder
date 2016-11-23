@@ -1,0 +1,1 @@
+json.array! @riesitels, partial: 'riesitels/riesitel', as: :riesitel

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meno:</strong>
+  <%= @organizator.meno %>
+</p>
+
+<p>
+  <strong>Priezvisko:</strong>
+  <%= @organizator.priezvisko %>
+</p>
+
+<p>
+  <strong>Nick:</strong>
+  <%= @organizator.nick %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @organizator.status %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @organizator.email %>
+</p>
+
+<p>
+  <strong>Telefon:</strong>
+  <%= @organizator.telefon %>
+</p>
+
+<%= link_to 'Edit', edit_organizator_path(@organizator) %> |
+<%= link_to 'Back', organizators_path %>

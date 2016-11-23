@@ -40708,3 +40708,39 @@ Processing by KolosController#show as HTML
   [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM `rocniks`
   [1m[36mRocnik Load (0.6ms)[0m  [1mSELECT  `rocniks`.* FROM `rocniks`  ORDER BY cislo DESC LIMIT 1[0m
 Completed 200 OK in 96ms (Views: 85.1ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-11-23 09:45:52 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by HomepagesController#login as HTML
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM `rocniks`
+  Rendered homepages/login.html.erb within layouts/login (2.2ms)
+Completed 200 OK in 651ms (Views: 644.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/homepages.self-62d00816814afd6bf5f5beb09a143ebf6fe7a4197e019947f2a0a805435ba1dd.js?body=1" for 127.0.0.1 at 2016-11-23 09:45:54 +0100
+
+
+Started GET "/homepages/login?utf8=%E2%9C%93&notice=login&username=user&pass=user&commit=Prihl%C3%A1si%C5%A5+sa" for 127.0.0.1 at 2016-11-23 09:45:58 +0100
+Processing by HomepagesController#login as HTML
+  Parameters: {"utf8"=>"✓", "notice"=>"login", "username"=>"user", "pass"=>"user", "commit"=>"Prihlásiť sa"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `rocniks`[0m
+Redirected to http://localhost:3000/homepages
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/homepages" for 127.0.0.1 at 2016-11-23 09:45:58 +0100
+Processing by HomepagesController#index as HTML
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `rocniks`
+  [1m[36mRocnik Load (0.6ms)[0m  [1mSELECT  `rocniks`.* FROM `rocniks`  ORDER BY cislo DESC LIMIT 1[0m
+  [1m[35mKnizka Load (1.9ms)[0m  SELECT  `knizkas`.* FROM `knizkas` WHERE `knizkas`.`rocnik` = 19  ORDER BY seria ASC, cislo DESC LIMIT 1
+  [1m[36m (1.8ms)[0m  [1mSELECT COUNT(*) FROM `knizka_obsahs` WHERE `knizka_obsahs`.`knizka_id` = 5[0m
+  [1m[35mKnizkaObsah Load (0.6ms)[0m  SELECT `knizka_obsahs`.* FROM `knizka_obsahs` WHERE `knizka_obsahs`.`knizka_id` = 5  ORDER BY `knizka_obsahs`.`cislo` ASC
+  [1m[36mKnizka Load (0.7ms)[0m  [1mSELECT `knizkas`.* FROM `knizkas` WHERE `knizkas`.`rocnik` = 19 AND `knizkas`.`seria` = 'Letná'  ORDER BY `knizkas`.`cislo` ASC[0m
+  [1m[35mKolo Load (0.6ms)[0m  SELECT `kolos`.* FROM `kolos` WHERE `kolos`.`rocnik` = 19 AND `kolos`.`seria` = 'Letná'  ORDER BY `kolos`.`cislo` ASC
+  [1m[36mPriklad Load (0.5ms)[0m  [1mSELECT  `priklads`.* FROM `priklads`  ORDER BY `priklads`.`id` ASC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `priklads`.* FROM `priklads`  ORDER BY `priklads`.`id` ASC LIMIT 1
+  Rendered homepages/index.html.erb within layouts/application (109.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM `rocniks`[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `rocniks`.* FROM `rocniks`  ORDER BY cislo DESC LIMIT 1
+Completed 200 OK in 293ms (Views: 224.7ms | ActiveRecord: 18.4ms)

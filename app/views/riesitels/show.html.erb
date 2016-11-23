@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meno:</strong>
+  <%= @riesitel.meno %>
+</p>
+
+<p>
+  <strong>Priezvisko:</strong>
+  <%= @riesitel.priezvisko %>
+</p>
+
+<p>
+  <strong>Adresa:</strong>
+  <%= @riesitel.adresa %>
+</p>
+
+<p>
+  <strong>Datum narodenia:</strong>
+  <%= @riesitel.datum_narodenia %>
+</p>
+
+<p>
+  <strong>Telefon:</strong>
+  <%= @riesitel.telefon %>
+</p>
+
+<p>
+  <strong>Telefon rodic:</strong>
+  <%= @riesitel.telefon_rodic %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @riesitel.email %>
+</p>
+
+<%= link_to 'Edit', edit_riesitel_path(@riesitel) %> |
+<%= link_to 'Back', riesitels_path %>

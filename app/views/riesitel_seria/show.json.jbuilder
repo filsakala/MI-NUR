@@ -1,0 +1,1 @@
+json.partial! "riesitel_seria/riesitel_serium", riesitel_serium: @riesitel_serium

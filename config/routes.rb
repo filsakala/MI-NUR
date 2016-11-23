@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :organizators
+
+  resources :riesitel_seria
+
+  resources :riesitels
+
   resources :homepages do
     collection do
       get :login

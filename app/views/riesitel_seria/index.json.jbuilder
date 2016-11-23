@@ -1,0 +1,1 @@
+json.array! @riesitel_seria, partial: 'riesitel_seria/riesitel_serium', as: :riesitel_serium

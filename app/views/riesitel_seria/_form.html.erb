@@ -1,0 +1,41 @@
+<%= form_for(@riesitel_serium) do |f| %>
+  <% if @riesitel_serium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@riesitel_serium.errors.count, "error") %> prohibited this riesitel_serium from being saved:</h2>
+
+      <ul>
+      <% @riesitel_serium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :skola %><br>
+    <%= f.text_field :skola %>
+  </div>
+  <div class="field">
+    <%= f.label :trieda %><br>
+    <%= f.text_field :trieda %>
+  </div>
+  <div class="field">
+    <%= f.label :kategoria %><br>
+    <%= f.number_field :kategoria %>
+  </div>
+  <div class="field">
+    <%= f.label :eriesitel %><br>
+    <%= f.check_box :eriesitel %>
+  </div>
+  <div class="field">
+    <%= f.label :rocnik %><br>
+    <%= f.number_field :rocnik %>
+  </div>
+  <div class="field">
+    <%= f.label :seria %><br>
+    <%= f.text_field :seria %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

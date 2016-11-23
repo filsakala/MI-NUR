@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  skola: MyString
+  trieda: MyString
+  kategoria: 1
+  eriesitel: false
+  rocnik: 1
+  seria: MyString
+
+two:
+  skola: MyString
+  trieda: MyString
+  kategoria: 1
+  eriesitel: false
+  rocnik: 1
+  seria: MyString
