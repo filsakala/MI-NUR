@@ -9,6 +9,8 @@ class CreateRiesitelSeria < ActiveRecord::Migration
       t.string :seria
 
       t.timestamps null: false
+      t.belongs_to :riesitel, index: true
+      t.belongs_to :seria, index: true
     end
   end
 end

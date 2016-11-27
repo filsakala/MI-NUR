@@ -4,21 +4,27 @@ class RiesitelSeriaController < ApplicationController
   # GET /riesitel_seria
   # GET /riesitel_seria.json
   def index
-    @riesitel_seria = RiesitelSerium.all
+    if !params[:id].blank?
+      @riesitel_seria = RiesitelSerium.find_by_seria_id(params[:id])
+      return
+    end
+    if !params[:riesitelia_ids].blank?
+      @riesitel_seria = RiesitelSerium.find(params[:riesitelia_ids])
+      return
+    end
+    @riesitel_seria = nil
   end
 
-  # GET /riesitel_seria/1
-  # GET /riesitel_seria/1.json
-  def show
-  end
-
-  # GET /riesitel_seria/new
-  def new
-    @riesitel_serium = RiesitelSerium.new
-  end
-
-  # GET /riesitel_seria/1/edit
-  def edit
+  def riesitelia_serie
+    if !params[:id].blank?
+      @riesitel_seria = RiesitelSerium.where(seria_id: params[:id])
+      return
+    end
+    if !params[:riesitelia_ids].blank?
+      @riesitel_seria = RiesitelSerium.find(params[:riesitelia_ids])
+      return
+    end
+    @riesitel_seria = nil
   end
 
   # POST /riesitel_seria
@@ -61,14 +67,40 @@ class RiesitelSeriaController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_riesitel_serium
-      @riesitel_serium = RiesitelSerium.find(params[:id])
+  def edit_riesitels
+    if !params[:ids].blank?
+      riesitel = nil
+      params[:ids].each_with_index do |id, index|
+        riesitel = RiesitelSerium.find(id)
+        riesitel.skola = params[:skola][index]
+        riesitel.trieda = params[:trieda][index]
+        riesitel.kategoria = params[:kategoria][index]
+        riesitel.eriesitel = false
+        if !params[:eriesitelia].blank?
+          params[:eriesitelia].each do |eId|
+            riesitel.eriesitel = true if eId == id
+          end
+        end
+        if !params[:delete].blank?
+          params[:delete].each do |dId|
+            riesitel.destroy
+          end
+        end
+        riesitel.save
+      end
     end
+    redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', id: riesitel.seria_id)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def riesitel_serium_params
-      params.require(:riesitel_serium).permit(:skola, :trieda, :kategoria, :eriesitel, :rocnik, :seria)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_riesitel_serium
+    @riesitel_serium = RiesitelSerium.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def riesitel_serium_params
+    params.require(:riesitel_serium).permit(:skola, :trieda, :kategoria, :eriesitel, :rocnik, :seria)
+  end
+
 end

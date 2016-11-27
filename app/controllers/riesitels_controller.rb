@@ -61,14 +61,52 @@ class RiesitelsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_riesitel
-      @riesitel = Riesitel.find(params[:id])
+  def add_riesitels_to_seria
+    if !params[:riesitels].blank?
+      seria = Serium.find(params[:seria_id])
+      ids = []
+      params[:riesitels].each do |rID|
+        riesitel = Riesitel.find(rID)
+        rSerie = RiesitelSerium.create(riesitel: riesitel, seria: seria.rocnik.to_s + '. ' + seria.nazov, seria_id: seria.id)
+        ids << rSerie.id
+      end
+      redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', riesitelia_ids: ids)
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def riesitel_params
-      params.require(:riesitel).permit(:meno, :priezvisko, :adresa, :datum_narodenia, :telefon, :telefon_rodic, :email)
+  def add_riesitels
+    @riesiteliaToAdd = []
+    save = false
+    if !params[:meno].blank?
+      save = true if params[:commit] == "Pridať"
+      params[:meno].each_with_index do |meno, i|
+        newRiesitel = Riesitel.new
+        newRiesitel.meno = meno
+        newRiesitel.priezvisko = params[:priezvisko][i]
+        newRiesitel.adresa = params[:adresa][i]
+        newRiesitel.datum_narodenia = params[:dat_nar][i]
+        newRiesitel.telefon = params[:cislo][i]
+        newRiesitel.telefon_rodic = params[:cislo_rodic][i]
+        newRiesitel.email = params[:email][i]
+        newRiesitel.save if save
+        @riesiteliaToAdd << newRiesitel
+      end
+      if save
+        redirect_to url_for(:controller => 'riesitels', :action => 'index', notice: "Riešitelia pridaný")
+        return
+      end
     end
+    render :action => 'new'
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_riesitel
+    @riesitel = Riesitel.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def riesitel_params
+    params.require(:riesitel).permit(:meno, :priezvisko, :adresa, :datum_narodenia, :telefon, :telefon_rodic, :email)
+  end
 end

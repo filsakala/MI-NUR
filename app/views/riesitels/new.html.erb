@@ -1,5 +1,64 @@
-<h1>New Riesitel</h1>
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Riešitelia", riesitels_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Pridávanie riešiteľov</div>
+  </div>
+</div>
 
-<%= render 'form' %>
+<h1>Pridávanie riešiteľov</h1>
 
-<%= link_to 'Back', riesitels_path %>
+
+</div>
+<%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels'), class: 'ui form' do %>
+    <table class="ui teal selectable celled table">
+      <thead>
+      <tr>
+        <th>Meno</th>
+        <th>Priezvisko</th>
+        <th>Adresa</th>
+        <th>Dát. narodenia</th>
+        <th>Tel. č.</th>
+        <th>Tel. č. rodiča</th>
+        <th>Email</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @riesiteliaToAdd != nil
+        @riesiteliaToAdd.each do |newRiesitel|  %>
+      <tr>
+        <td><%= text_field_tag "meno[]", newRiesitel.meno %></td>
+        <td><%= text_field_tag "priezvisko[]", newRiesitel.priezvisko %></td>
+        <td><%= text_field_tag "adresa[]", newRiesitel.adresa %></td>
+        <td><%= text_field_tag "dat_nar[]", newRiesitel.datum_narodenia %></td>
+        <td><%= text_field_tag "cislo[]", newRiesitel.telefon %></td>
+        <td><%= text_field_tag "cislo_rodic[]", newRiesitel.telefon_rodic %></td>
+        <td><%= text_field_tag "email[]", newRiesitel.email %></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <tr>
+      <td><%= text_field_tag "meno[]" %></td>
+      <td><%= text_field_tag "priezvisko[]" %></td>
+      <td><%= text_field_tag "adresa[]" %></td>
+      <td><%= text_field_tag "dat_nar[]" %></td>
+      <td><%= text_field_tag "cislo[]" %></td>
+      <td><%= text_field_tag "cislo_rodic[]" %></td>
+      <td><%= text_field_tag "email[]" %></td>
+      </tr>
+      </tbody>
+
+    </table>
+
+<div class="column right floated">
+  <%= submit_tag "addRow", class: "ui big right aligned green plus circle icon" %>
+</div>
+
+<div class="column">
+  <%= submit_tag "Pridať", class: 'ui green button' %>
+</div>
+
+<% end %>

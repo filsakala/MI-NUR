@@ -2,9 +2,19 @@ Rails.application.routes.draw do
 
   resources :organizators
 
-  resources :riesitel_seria
+  resources :riesitel_seria do
+    collection do
+      get :riesitelia_serie
+      post :edit_riesitels
+    end
+  end
 
-  resources :riesitels
+  resources :riesitels do
+    collection do
+      post :add_riesitels
+      post :add_riesitels_to_seria
+    end
+  end
 
   resources :homepages do
     collection do

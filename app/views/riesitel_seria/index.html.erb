@@ -1,37 +1,57 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Riešitelia", riesitels_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Riešitelia série</div>
+  </div>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Riesitel Seria</h1>
+<h1>Riešitelia série</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Skola</th>
-      <th>Trieda</th>
-      <th>Kategoria</th>
-      <th>Eriesitel</th>
-      <th>Rocnik</th>
-      <th>Seria</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @riesitel_seria.each do |riesitel_serium| %>
+<%= form_tag url_for(:controller => 'riesitel_seria', :action => 'edit_riesitels'), class: 'ui form' do %>
+    <table class="ui teal selectable celled striped table datatable">
+      <thead>
       <tr>
-        <td><%= riesitel_serium.skola %></td>
-        <td><%= riesitel_serium.trieda %></td>
-        <td><%= riesitel_serium.kategoria %></td>
-        <td><%= riesitel_serium.eriesitel %></td>
-        <td><%= riesitel_serium.rocnik %></td>
-        <td><%= riesitel_serium.seria %></td>
-        <td><%= link_to 'Show', riesitel_serium %></td>
-        <td><%= link_to 'Edit', edit_riesitel_serium_path(riesitel_serium) %></td>
-        <td><%= link_to 'Destroy', riesitel_serium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Meno</th>
+        <th>Škola</th>
+        <th>Trieda</th>
+        <th>Kategória</th>
+        <th>E-riešiteľ</th>
+        <th>Odstrániť</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% if @riesitel_seria != nil
+           @riesitel_seria.each do |riesitel_serium| %>
+              <tr>
+                <td><% r = Riesitel.find(riesitel_serium.riesitel_id) %><%= r.meno + ' ' + r.priezvisko %><%= hidden_field_tag "ids[]", riesitel_serium.id %></td>
+                <td><div class="field"><select name="skola[]">
+                  <option value="<%= riesitel_serium.skola %>"><%= riesitel_serium.skola %></option>
+                  <option value="GAMCA">GAMCA</option>
+                  <option value="GJH">GJH</option>
+                </select></div>
+                </td>
+                <td><%= text_field_tag "trieda[]", riesitel_serium.trieda %></td>
+                <td><div class="field"><select name="kategoria[]">
+                  <option value="<%= riesitel_serium.kategoria %>"><%= riesitel_serium.kategoria %></option>
+                  <option value="9">9</option>
+                  <option value="8">8</option>
+                  <option value="7">7</option>
+                  <option value="6">6</option>
+                  <option value="5">5</option>
+                </select></div></td>
+                <td><%= check_box_tag "eriesitelia[]", riesitel_serium[:id], {:checked => riesitel_serium.eriesitel} %></td>
+                <td><%= check_box_tag "delete[]", riesitel_serium[:id]%></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Riesitel serium', new_riesitel_serium_path %>
+    <%= submit_tag "Uložiť", class: 'ui green button' %>
+<% end %>
