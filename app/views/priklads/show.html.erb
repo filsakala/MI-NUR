@@ -94,7 +94,7 @@
   <% @priklad.komentars.new %>
   <%= form_for @priklad.komentars.new, html: { class: 'ui form' } do |f| %>
       <%= f.hidden_field :priklad_id, value: @priklad.id %>
-      <%= f.text_area :text %>
-      <%= f.submit 'Komentovať', class: 'ui blue submit button' %>
+      <%= f.text_area :text, :required => true %>
+      <%= f.submit 'Komentovať', class: 'ui blue submit button m-t-1' %>
   <% end %>
 </div>

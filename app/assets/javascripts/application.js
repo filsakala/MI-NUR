@@ -16,3 +16,50 @@
 //= require semantic-ui
 //= require_tree .
 
+$(document).ready(function() {
+    $('#vyber-priklad').DataTable( {
+        initComplete: function () {
+            this.api().column(3).every( function () {
+                var column = this;
+                var select = $('<select id="vyber-priklad_kategoria" name="vyber-priklad_kategoria"><option value=""></option></select>')
+                    .insertAfter( $('#vyber-priklad_filter')   )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+                select.wrap( "<div class='select-group'></div>" );
+                var label = $('<label for="vyber-priklad_kategoria">Kategória:</label>')
+                    .insertBefore($('#vyber-priklad_kategoria   '));
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+            this.api().column(4).every( function () {
+                var column = this;
+                var select = $('<select id="vyber-priklad_stav" name="vyber-priklad_stav"><option value=""></option></select>')
+                    .insertAfter( $('#vyber-priklad_filter')   )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+                select.wrap( "<div class='select-group'></div>" );
+                var label = $('<label class=""for="vyber-priklad_stav">Stav:</label>')
+                    .insertBefore($('#vyber-priklad_stav'));
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );

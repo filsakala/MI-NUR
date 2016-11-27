@@ -5,8 +5,8 @@
       <div class="card">
         <div class="content">
           <div class="header">
-            Knižka
             <%= link_to knizka_path(@aktualna_knizka) do %>
+                Knižka
                 <i class="unhide icon"></i>
             <% end %>
           </div>
@@ -15,7 +15,7 @@
             ročník, <%= @aktualna_knizka.seria %> séria,
             <%= @aktualna_knizka.cislo %>. knižka
           </div>
-          <div class="description">
+          <div class="description m-t-1">
             <% if @aktualna_knizka.knizka_obsahs.count > 0 %>
                 <div class="ui list">
                   <% @aktualna_knizka.knizka_obsahs.order(:cislo).each do |k| %>
@@ -54,8 +54,8 @@
   <div class="card">
     <div class="content">
       <div class="header">
-        Ročník, séria
         <%= link_to rocnik_path(@aktualny_rocnik) do %>
+            Ročník, séria
             <i class="unhide icon"></i>
         <% end %>
       </div>
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="extra content">
-      <div class="description">
+      <div class="descriptionm">
         <h3>Kolá</h3>
         <div class="ui list">
           <% @kola_l.each do |kolo| %>
@@ -100,7 +100,7 @@
         ročník, Letná séria,
         1. kolo
       </div>
-      <div class="description">
+      <div class="description m-t-1">
         <div class="ui fluid vertical inverted green buttons">
           <%= link_to "Prihlás sa", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
           <%= link_to "Zadaj body", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
