@@ -70,12 +70,14 @@ class RiesitelSeriaController < ApplicationController
   def edit_riesitels
     if !params[:ids].blank?
       riesitel = nil
+      sID = nil
       params[:ids].each_with_index do |id, index|
         riesitel = RiesitelSerium.find(id)
         riesitel.skola = params[:skola][index]
         riesitel.trieda = params[:trieda][index]
         riesitel.kategoria = params[:kategoria][index]
         riesitel.eriesitel = false
+        sID = riesitel.seria_id
         if !params[:eriesitelia].blank?
           params[:eriesitelia].each do |eId|
             riesitel.eriesitel = true if eId == id
@@ -83,13 +85,18 @@ class RiesitelSeriaController < ApplicationController
         end
         if !params[:delete].blank?
           params[:delete].each do |dId|
-            riesitel.destroy
+            if dId == id
+              riesitel.destroy
+              riesitel = nil
+            end
           end
         end
-        riesitel.save
+        if riesitel != nil
+          riesitel.save
+        end
       end
     end
-    redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', id: riesitel.seria_id)
+    redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', id: sID)
   end
 
   private

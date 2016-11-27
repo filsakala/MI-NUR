@@ -71,7 +71,9 @@ class RiesitelsController < ApplicationController
         ids << rSerie.id
       end
       redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', riesitelia_ids: ids)
+      return
     end
+    redirect_to riesitels_url, notice: "Nevybrali stie žiadneho riešiteľa."
   end
 
   def add_riesitels

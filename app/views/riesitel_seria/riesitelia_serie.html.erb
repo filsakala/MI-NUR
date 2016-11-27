@@ -16,12 +16,12 @@
     <table class="ui teal selectable celled striped table datatable">
       <thead>
       <tr>
-        <th>Meno</th>
-        <th>Škola</th>
-        <th>Trieda</th>
-        <th>Kategória</th>
-        <th>E-riešiteľ</th>
-        <th>Odstrániť</th>
+        <th class="four wide">Meno</th>
+        <th class="four wide">Škola</th>
+        <th class="three wide">Trieda</th>
+        <th class="two wide">Kategória</th>
+        <th class="two wide">E-riešiteľ</th>
+        <th class="one wide">Odstrániť</th>
       </tr>
       </thead>
 
@@ -30,14 +30,14 @@
            @riesitel_seria.each do |riesitel_serium| %>
               <tr>
                 <td><% r = Riesitel.find(riesitel_serium.riesitel_id) %><%= r.meno + ' ' + r.priezvisko %><%= hidden_field_tag "ids[]", riesitel_serium.id %></td>
-                <td><div class="field"><select name="skola[]">
+                <td><div class="thirteen wide field"><select name="skola[]">
                   <option value="<%= riesitel_serium.skola %>"><%= riesitel_serium.skola %></option>
                   <option value="GAMCA">GAMCA</option>
                   <option value="GJH">GJH</option>
                 </select></div>
                 </td>
-                <td><%= text_field_tag "trieda[]", riesitel_serium.trieda %></td>
-                <td><div class="field"><select name="kategoria[]">
+                <td><%= text_field_tag "trieda[]", riesitel_serium.trieda, class: 'twelve wide field' %></td>
+                <td><div class="eleven wide field"><select name="kategoria[]">
                   <option value="<%= riesitel_serium.kategoria %>"><%= riesitel_serium.kategoria %></option>
                   <option value="9">9</option>
                   <option value="8">8</option>

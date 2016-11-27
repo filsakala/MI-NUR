@@ -11,13 +11,14 @@
 <div class="ui grid">
   <div class="fourteen wide column"><h1>Riešitelia</h1></div>
   <div class="column">
-
     <%= link_to new_riesitel_path do %>
         <i class="ui big right aligned green plus circle link icon"></i>
     <% end %>
   </div>
+</div>
 
-  <%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels_to_seria'), class: 'ui form' do %>
+<%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels_to_seria'), class: 'ui form' do %>
+    <div>
       <table class="ui teal selectable celled striped table datatable">
         <thead>
         <tr>
@@ -32,7 +33,6 @@
           <th>Akcia</th>
         </tr>
         </thead>
-
         <tbody>
         <% @riesitels.each do |riesitel| %>
             <tr>
@@ -48,25 +48,25 @@
                 <%= link_to edit_riesitel_path(riesitel) do %>
                     <i class="edit link icon"></i>
                 <% end %>
-                <%= link_to riesitel, method: :delete, data: {confirm: 'Naozaj chceš vymazať riešiteľa?'} do %>
+                <%= link_to riesitel, method: :delete, data: { confirm: 'Naozaj chceš vymazať riešiteľa?' } do %>
                     <i class="remove link icon"></i>
                 <% end %>
               </td>
             </tr>
         <% end %>
         </tbody>
-
       </table>
-      <div class="row">
-        <div class="column">Pridať do série:</div>
-        <div class="column"><select name="seria_id">
-          <option value="">Vybrať sériu</option>
-          <% Serium.order('rocnik DESC').each do |s| %>
-              <option value="<%= s.id %>"><%= s.rocnik.to_s + '. ' + s.nazov %></option>
-          <% end %>
-        </select></div>
-        <div class="column"><%= submit_tag "Pridať", class: 'ui green button' %>
-        </div>
+    </div>
+
+    <div class="ui grid container">
+      <div class="five wide column">Pridať do série:</div>
+      <div class="five wide column"><select name="seria_id">
+        <option value="">Vybrať sériu</option>
+        <% Serium.order('rocnik DESC').each do |s| %>
+            <option value="<%= s.id %>"><%= s.rocnik.to_s + '. ' + s.nazov %></option>
+        <% end %>
+      </select></div>
+      <div class="right aligned five wide column"><%= submit_tag "Pridať", class: 'ui green button' %>
       </div>
-  <% end %>
-</div>
+    </div>
+<% end %>

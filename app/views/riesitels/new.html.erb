@@ -8,11 +8,12 @@
   </div>
 </div>
 
-<h1>Pridávanie riešiteľov</h1>
-
-
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Pridávanie riešiteľov</h1></div>
 </div>
+
 <%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels'), class: 'ui form' do %>
+    <div>
     <table class="ui teal selectable celled table">
       <thead>
       <tr>
@@ -52,13 +53,17 @@
       </tbody>
 
     </table>
+    </div>
 
-<div class="column right floated">
-  <%= submit_tag "addRow", class: "ui big right aligned green plus circle icon" %>
-</div>
+    <br>
 
-<div class="column">
-  <%= submit_tag "Pridať", class: 'ui green button' %>
-</div>
+    <div class="ui grid container">
+      <div class="left aligned nine wide column">
+        <%= submit_tag "Uložiť", class: 'ui green button' %>
+      </div>
+      <div class="right aligned seven wide column">
+        <%= submit_tag "Ďalší", class: 'ui green button' %>
+      </div>
+    </div>
 
 <% end %>
