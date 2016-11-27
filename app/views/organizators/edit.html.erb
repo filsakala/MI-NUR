@@ -1,6 +1,25 @@
-<h1>Editing Organizator</h1>
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Príklady", organizators_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Upraviť</div>
+  </div>
+</div>
 
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Upraviť organizátora <%= @organizator.nick %></h1></div>
+  <div class="column">
+    <%= link_to organizators_path do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+  <div class="column">
+    <%= link_to @organizator, method: :delete, data: { confirm: 'Naozaj chceš vymazať organizátora '+@organizator.nick+'?' } do %>
+        <i class="ui big right aligned remove link icon"></i>
+    <% end %>
+  </div>
+</div>
 <%= render 'form' %>
 
-<%= link_to 'Show', @organizator %> |
-<%= link_to 'Back', organizators_path %>

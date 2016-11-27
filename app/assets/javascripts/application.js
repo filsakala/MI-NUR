@@ -62,4 +62,20 @@ $(document).ready(function() {
             } );
         }
     } );
+
+    $('#organizator-form').submit( function(event) {
+        var password = $("#password"), confirm_password = $("#password-confirm");
+        console.log(password.val() != confirm_password.val());
+        console.log(password.val());
+        console.log(confirm_password.val());
+        if(password.val() != confirm_password.val()) {
+            event.preventDefault();
+            var notice = '<div id="password-notice" class="ui red icon message"><span class="ui-icon ui-icon-notice"></span> <div class="content"> <div class="header">Heslá sa nezhodujú. </div> </div> </div>';
+            $("#password-notice").remove();
+            $("#fieldset-password").prepend(notice);
+        } else{
+            $("#password-notice").remove();
+        }
+    });
+
 } );
