@@ -1,45 +1,46 @@
-<%= form_for(@riesitel) do |f| %>
-  <% if @riesitel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@riesitel.errors.count, "error") %> prohibited this riesitel from being saved:</h2>
+<%= form_for(@riesitel, html: { class: 'ui form' }) do |f| %>
+    <% if @riesitel.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@riesitel.errors.count, "error") %> prohibited this
+            riesitel from being saved:</h2>
 
-      <ul>
-      <% @riesitel.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @riesitel.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :meno %>
+      <%= f.text_field :meno %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :meno %><br>
-    <%= f.text_field :meno %>
-  </div>
-  <div class="field">
-    <%= f.label :priezvisko %><br>
-    <%= f.text_field :priezvisko %>
-  </div>
-  <div class="field">
-    <%= f.label :adresa %><br>
-    <%= f.text_field :adresa %>
-  </div>
-  <div class="field">
-    <%= f.label "Dátum narodenia" %><br>
-    <%= f.text_field :datum_narodenia %>
-  </div>
-  <div class="field">
-    <%= f.label "Telefón" %><br>
-    <%= f.text_field :telefon %>
-  </div>
-  <div class="field">
-    <%= f.label "Telefón na rodiča" %><br>
-    <%= f.text_field :telefon_rodic %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Uložiť" %>
-  </div>
+    <div class="field">
+      <%= f.label :priezvisko %>
+      <%= f.text_field :priezvisko %>
+    </div>
+    <div class="field">
+      <%= f.label :adresa %>
+      <%= f.text_field :adresa %>
+    </div>
+    <div class="field">
+      <%= f.label "Dátum narodenia" %>
+      <%= f.text_field :datum_narodenia %>
+    </div>
+    <div class="field">
+      <%= f.label "Telefón" %>
+      <%= f.text_field :telefon %>
+    </div>
+    <div class="field">
+      <%= f.label "Telefón na rodiča" %>
+      <%= f.text_field :telefon_rodic %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Uložiť", class: 'ui green button' %>
+    </div>
 <% end %>

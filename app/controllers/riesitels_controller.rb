@@ -42,7 +42,7 @@ class RiesitelsController < ApplicationController
   def update
     respond_to do |format|
       if @riesitel.update(riesitel_params)
-        format.html { redirect_to @riesitel, notice: 'Riesitel was successfully updated.' }
+        format.html { redirect_to riesitels_path, notice: 'riesitel_update' }
         format.json { render :show, status: :ok, location: @riesitel }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class RiesitelsController < ApplicationController
   def destroy
     @riesitel.destroy
     respond_to do |format|
-      format.html { redirect_to riesitels_url, notice: 'Riesitel was successfully destroyed.' }
+      format.html { redirect_to riesitels_url, notice: 'riesitel_delete' }
       format.json { head :no_content }
     end
   end
@@ -70,17 +70,17 @@ class RiesitelsController < ApplicationController
         rSerie = RiesitelSerium.create(riesitel: riesitel, seria: seria.rocnik.to_s + '. ' + seria.nazov, seria_id: seria.id)
         ids << rSerie.id
       end
-      redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', riesitelia_ids: ids)
+      redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', riesitelia_ids: ids), notice: 'riesitel_add'
       return
     end
-    redirect_to riesitels_url, notice: "Nevybrali stie žiadneho riešiteľa."
+    redirect_to riesitels_url, notice: "riesitel_not_selected"
   end
 
   def add_riesitels
     @riesiteliaToAdd = []
     save = false
     if !params[:meno].blank?
-      save = true if params[:commit] == "Pridať"
+      save = true if params[:commit] == "Uložiť"
       params[:meno].each_with_index do |meno, i|
         newRiesitel = Riesitel.new
         newRiesitel.meno = meno
@@ -94,7 +94,7 @@ class RiesitelsController < ApplicationController
         @riesiteliaToAdd << newRiesitel
       end
       if save
-        redirect_to url_for(:controller => 'riesitels', :action => 'index', notice: "Riešitelia pridaný")
+        redirect_to riesitels_path, notice: "riesitel_add"
         return
       end
     end

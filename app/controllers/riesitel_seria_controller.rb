@@ -96,7 +96,7 @@ class RiesitelSeriaController < ApplicationController
         end
       end
     end
-    redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', id: sID)
+    redirect_to url_for(:controller => 'riesitel_seria', :action => 'riesitelia_serie', id: sID), notice: 'riesitels_edit'
   end
 
   private
