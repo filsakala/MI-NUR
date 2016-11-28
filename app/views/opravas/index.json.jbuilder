@@ -1,0 +1,1 @@
+json.array! @opravas, partial: 'opravas/oprava', as: :oprava

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rocnik: 1
+  seria: MyString
+  kolo: 1
+  priklady: MyString
+
+two:
+  rocnik: 1
+  seria: MyString
+  kolo: 1
+  priklady: MyString

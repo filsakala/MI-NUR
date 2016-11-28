@@ -101,10 +101,16 @@
         1. kolo
       </div>
       <div class="description m-t-1">
-        <div class="ui fluid vertical inverted green buttons">
-          <%= link_to "Prihlás sa", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
-          <%= link_to "Zadaj body", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
-          <%= link_to "Napíš vzorák", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
+        <div class="ui fluid vertical inverted buttons">
+          <%= link_to "Prihlás sa", opravas_path(rocnik: @aktualny_rocnik.cislo, seria: 'Letná', kolo: 1), class: 'ui green button' %>
+          <% o = Oprava.where(rocnik: @aktualny_rocnik.cislo, seria: 'Letná', kolo: 1).take %>
+          <% if o && !o.priklady.blank? && !eval(o.priklady).blank? %>
+              <%= link_to "Zadaj body", nil, data: { confirm: 'Not implemented.' }, class: 'ui button' %>
+              <%= link_to "Napíš vzorák", edit_oprava_path(o, rocnik: @aktualny_rocnik.cislo, seria: 'Letná', kolo: 1), class: 'ui green button' %>
+          <% else %>
+              <%= link_to "Zadaj body", nil, data: { confirm: 'Nie si prihlásený na žiadne opravovanie.' }, class: 'ui button' %>
+              <%= link_to "Napíš vzorák", nil, data: { confirm: 'Nie si prihlásený na žiadne opravovanie.' }, class: 'ui button' %>
+          <% end %>
         </div>
       </div>
     </div>

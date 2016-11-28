@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :opravas
+
   resources :organizators
 
   resources :riesitel_seria do

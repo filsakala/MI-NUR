@@ -1,0 +1,68 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{params[:rocnik]}. ročník", rocnik_path(Rocnik.find_by_cislo(params[:rocnik])), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= params[:seria] %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{params[:kolo]}. kolo", kolo_path(Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Opravovanie</div>
+  </div>
+</div>
+
+<% if notice == 'oprava_add' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Tvoje opravovania boli uložené.
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<h1>Opravovanie</h1>
+<table class="ui teal selectable celled striped table">
+  <thead>
+  <tr>
+    <th>Č.</th>
+    <th>Príklad</th>
+    <th>Samostatní</th>
+    <th>Nesamostatní</th>
+    <th>Akcie</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% priklady = Priklad.where(kolo: Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take) %>
+  <% (1..9).each do |cpr| %>
+      <tr>
+        <td><%= cpr %></td>
+        <td>
+          <% p = priklady.where(cislo_v_kole: cpr).take %>
+          <% if p %>
+              <%= link_to p do %>
+                  Príklad <%= p.nazov %> <i class="unhide link icon"></i>
+              <% end %>
+          <% else %>
+              Nevybraný.
+          <% end %>
+        </td>
+        <td>
+          <% if @priklady.include?("#{cpr}") %>
+              Marianna
+          <% end %>
+        </td>
+        <td></td>
+        <td>
+          <% if @priklady.include?("#{cpr}") %>
+              <%= link_to 'Odhlásiť sa', new_oprava_path(rocnik: params[:rocnik], seria: params[:seria], kolo: params[:kolo], priklad: cpr), class: 'ui red button', data: { confirm: "Naozaj sa chceš odhlásiť z príkladu #{cpr}?" } %>
+          <% else %>
+              <%= link_to 'Prihlásiť sa', new_oprava_path(rocnik: params[:rocnik], seria: params[:seria], kolo: params[:kolo], priklad: cpr), class: 'ui green button', data: { confirm: "Naozaj sa chceš prihlásiť na príklad #{cpr}?" } %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,51 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{params[:rocnik]}. ročník", rocnik_path(Rocnik.find_by_cislo(params[:rocnik])), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= params[:seria] %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{params[:kolo]}. kolo", kolo_path(Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Výber príkladu na vzorák</div>
+  </div>
+</div>
+
+<h1>Výber príkladu na vzorák</h1>
+
+<div class="ui icon message">
+  <i class="info icon"></i>
+  <div class="content">
+    <div class="header">
+      Zoznam obsahuje príklady, na ktorých opravovanie si prihlásený.
+    </div>
+  </div>
+</div>
+
+<% if !@priklady.blank? %>
+    <div class="ui list">
+      <% @priklady.sort.each do |cpr| %>
+          <% p = Priklad.where(kolo: Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take, cislo_v_kole: cpr).take %>
+          <div class="item">
+            <i class="arrow right icon"></i>
+            <div class="content">
+              <% if p %>
+                  <%= link_to "#{cpr}. Príklad #{p.nazov}", edit_priklad_path(p) %>
+              <% else %>
+                  <%= cpr %>. Príklad nie je vybraný. Nie je možné k nemu pridať
+                  vzorák.
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+<% else %>
+    <div class="ui message">
+      <div class="content">
+        <div class="header">
+          Neexistuje žiadny príklad, ktorý opravuješ.
+        </div>
+      </div>
+    </div>
+<% end %>

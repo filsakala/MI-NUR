@@ -1,0 +1,33 @@
+<%= form_for(@oprava) do |f| %>
+  <% if @oprava.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@oprava.errors.count, "error") %> prohibited this oprava from being saved:</h2>
+
+      <ul>
+      <% @oprava.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rocnik %><br>
+    <%= f.number_field :rocnik %>
+  </div>
+  <div class="field">
+    <%= f.label :seria %><br>
+    <%= f.text_field :seria %>
+  </div>
+  <div class="field">
+    <%= f.label :kolo %><br>
+    <%= f.number_field :kolo %>
+  </div>
+  <div class="field">
+    <%= f.label :priklady %><br>
+    <%= f.text_field :priklady %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

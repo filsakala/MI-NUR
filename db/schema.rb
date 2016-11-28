@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123085115) do
+ActiveRecord::Schema.define(version: 20161128101022) do
 
   create_table "homepages", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20161123085115) do
   end
 
   add_index "komentars", ["priklad_id"], name: "index_komentars_on_priklad_id", using: :btree
+
+  create_table "opravas", force: :cascade do |t|
+    t.integer  "rocnik",     limit: 4
+    t.string   "seria",      limit: 255
+    t.integer  "kolo",       limit: 4
+    t.string   "priklady",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "organizators", force: :cascade do |t|
     t.string   "meno",       limit: 255

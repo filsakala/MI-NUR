@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rocnik:</strong>
+  <%= @oprava.rocnik %>
+</p>
+
+<p>
+  <strong>Seria:</strong>
+  <%= @oprava.seria %>
+</p>
+
+<p>
+  <strong>Kolo:</strong>
+  <%= @oprava.kolo %>
+</p>
+
+<p>
+  <strong>Priklady:</strong>
+  <%= @oprava.priklady %>
+</p>
+
+<%= link_to 'Edit', edit_oprava_path(@oprava) %> |
+<%= link_to 'Back', opravas_path %>
