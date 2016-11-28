@@ -49,7 +49,8 @@ class OpravasController < ApplicationController
       @priklady = []
     end
     if @priklady.size == 1
-      redirect_to edit_priklad_path(Priklad.where(kolo: Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take, cislo_v_kole: @priklady[0]).take)
+      pr = Priklad.where(kolo: Kolo.where(rocnik: params[:rocnik], seria: params[:seria], cislo: params[:kolo]).take, cislo_v_kole: @priklady[0]).take
+      redirect_to edit_priklad_path(pr) if pr
     end
   end
 
