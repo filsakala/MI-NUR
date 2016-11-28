@@ -28,7 +28,7 @@ class OrganizatorsController < ApplicationController
 
     respond_to do |format|
       if @organizator.save
-        format.html { redirect_to @organizator, notice: 'Organizator was successfully created.' }
+        format.html { redirect_to organizators_path, notice: 'org_add' }
         format.json { render :show, status: :created, location: @organizator }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class OrganizatorsController < ApplicationController
   def update
     respond_to do |format|
       if @organizator.update(organizator_params)
-        format.html { redirect_to @organizator, notice: 'Organizator was successfully updated.' }
+        format.html { redirect_to organizators_path, notice: 'org_edit' }
         format.json { render :show, status: :ok, location: @organizator }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class OrganizatorsController < ApplicationController
   def destroy
     @organizator.destroy
     respond_to do |format|
-      format.html { redirect_to organizators_url, notice: 'Organizator was successfully destroyed.' }
+      format.html { redirect_to organizators_url, notice: 'org_destroy' }
       format.json { head :no_content }
     end
   end

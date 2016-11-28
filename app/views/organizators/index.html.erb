@@ -6,7 +6,25 @@
   </div>
 </div>
 
-<% if notice == 'organizator_delete' %>
+<% if notice == 'org_add' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Organizátor bol úspešne pridaný.
+        </div>
+      </div>
+    </div>
+<% elsif notice == 'org_edit' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Organizátor bol úspešne upravený.
+        </div>
+      </div>
+    </div>
+<% elsif notice == 'org_destroy' %>
     <div class="ui green icon message">
       <i class="check mark icon"></i>
       <div class="content">
@@ -29,19 +47,19 @@
 
 <table class="ui teal selectable celled striped table datatable">
   <thead>
-    <tr>
-      <th>Meno</th>
-      <th>Priezvisko</th>
-      <th>Nick</th>
-      <th>Status</th>
-      <th>Email</th>
-      <th>Telefon</th>
-      <th>Akcie</th>
-    </tr>
+  <tr>
+    <th>Meno</th>
+    <th>Priezvisko</th>
+    <th>Nick</th>
+    <th>Status</th>
+    <th>Email</th>
+    <th>Telefon</th>
+    <th>Akcie</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @organizators.each do |organizator| %>
+  <% @organizators.each do |organizator| %>
       <tr>
         <td><%= organizator.meno %></td>
         <td><%= organizator.priezvisko %></td>
@@ -58,7 +76,7 @@
           <% end %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
