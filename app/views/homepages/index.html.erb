@@ -63,31 +63,25 @@
         <%= @aktualny_rocnik.cislo %>. ročník, Letná séria
       </div>
     </div>
-    <div class="extra content">
-      <div class="description">
-        <h3>Knižky</h3>
-        <div class="ui list">
-          <% @knizky_l.each do |k| %>
-              <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
-          <% end %>
-        </div>
+    <div class="content">
+      <div class="header">Knižky</div>
+      <div class="ui list">
+        <% @knizky_l.each do |k| %>
+            <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
+        <% end %>
       </div>
     </div>
-    <div class="extra content">
-      <div class="descriptionm">
-        <h3>Kolá</h3>
-        <div class="ui list">
-          <% @kola_l.each do |kolo| %>
-              <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
-          <% end %>
-        </div>
+    <div class="content">
+      <div class="header">Kolá</div>
+      <div class="ui list">
+        <% @kola_l.each do |kolo| %>
+            <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+        <% end %>
       </div>
     </div>
-    <div class="extra content">
-      <div class="description">
-        <h3>Riešitelia</h3>
-        <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
-      </div>
+    <div class="content">
+      <div class="header">Riešitelia</div>
+      <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
     </div>
   </div>
   <div class="card">
