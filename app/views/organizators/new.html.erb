@@ -1,5 +1,21 @@
-<h1>New Organizator</h1>
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Organizátori", organizators_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Nový organizátor</div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Nový organizátor</h1></div>
+  <div class="column">
+    <%= link_to organizators_path do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', organizators_path %>

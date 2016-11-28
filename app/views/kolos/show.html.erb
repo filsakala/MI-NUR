@@ -111,7 +111,8 @@
   <div class="column">
     <h3>Výber z príkladov</h3>
     <%= form_tag url_for(:controller => 'kolos', :action => 'add_priklads'), class: 'ui form' do %>
-        <table class="ui teal selectable celled striped very compact small table datatable">
+        <div id="filter-priklad"></div>
+        <table id="vyber-priklad" class="ui teal selectable celled striped very compact small table dataTable">
           <thead>
           <tr>
             <th class="one wide"></th>

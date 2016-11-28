@@ -1,22 +1,65 @@
-<p id="notice"><%= notice %></p>
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Organizátori</div>
+  </div>
+</div>
 
-<h1>Listing Organizators</h1>
+<% if notice == 'org_add' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Organizátor bol úspešne pridaný.
+        </div>
+      </div>
+    </div>
+<% elsif notice == 'org_edit' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Organizátor bol úspešne upravený.
+        </div>
+      </div>
+    </div>
+<% elsif notice == 'org_destroy' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Organizátor bol úspešne odobraný.
+        </div>
+      </div>
+    </div>
+<% end %>
 
-<table>
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Organizátori</h1></div>
+  <div class="column">
+
+    <%= link_to new_organizator_path do %>
+        <i class="ui big right aligned green plus circle link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<table class="ui teal selectable celled striped table datatable">
   <thead>
-    <tr>
-      <th>Meno</th>
-      <th>Priezvisko</th>
-      <th>Nick</th>
-      <th>Status</th>
-      <th>Email</th>
-      <th>Telefon</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Meno</th>
+    <th>Priezvisko</th>
+    <th>Nick</th>
+    <th>Status</th>
+    <th>Email</th>
+    <th>Telefon</th>
+    <th>Akcie</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @organizators.each do |organizator| %>
+  <% @organizators.each do |organizator| %>
       <tr>
         <td><%= organizator.meno %></td>
         <td><%= organizator.priezvisko %></td>
@@ -24,14 +67,16 @@
         <td><%= organizator.status %></td>
         <td><%= organizator.email %></td>
         <td><%= organizator.telefon %></td>
-        <td><%= link_to 'Show', organizator %></td>
-        <td><%= link_to 'Edit', edit_organizator_path(organizator) %></td>
-        <td><%= link_to 'Destroy', organizator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to edit_organizator_path(organizator) do %>
+              <i class="edit link icon"></i>
+          <% end %>
+          <%= link_to organizator, method: :delete, data: { confirm: 'Naozaj chceš vymazať organizátora?' } do %>
+              <i class="remove link icon"></i>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Organizator', new_organizator_path %>

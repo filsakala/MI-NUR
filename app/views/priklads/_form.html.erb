@@ -13,24 +13,24 @@
     <% end %>
     <br>
     <div class="field">
-      <%= f.label :nazov, 'Názov' %>
-      <%= f.text_field :nazov %>
+      <%= f.label :nazov, 'Názov', class: 'label-required' %>
+      <%= f.text_field :nazov, :required => true %>
     </div>
     <div class="field">
-      <%= f.label :autor %>
-      <%= f.select :autor, options_for_select(['Filip', 'Barbora', 'Kubo', 'Gege'], @priklad.autor), include_blank: true %>
+      <%= f.label :autor, class: 'label-required' %>
+      <%= f.select :autor, options_for_select(['Filip', 'Barbora', 'Kubo', 'Gege'], @priklad.autor), include_blank: true, :required => true %>
     </div>
     <div class="field">
-      <%= f.label :kategoria, "Kategória" %>
-      <%= f.select :kategoria, options_for_select(['Séria', 'Náboj'], @priklad.kategoria), include_blank: true %>
+      <%= f.label :kategoria, "Kategória", class: 'label-required' %>
+      <%= f.select :kategoria, options_for_select(['Séria', 'Náboj'], @priklad.kategoria), include_blank: true, :required => true %>
     </div>
     <div class="field">
-      <%= f.label :stav %>
-      <%= f.select :stav, options_for_select(['nepozretý', 'vhodný', 'použitý', 'vyradený'], @priklad.stav), include_blank: true %>
+      <%= f.label :stav, class: 'label-required' %>
+      <%= f.select :stav, options_for_select(['nepozretý', 'vhodný', 'použitý', 'vyradený'], @priklad.stav), include_blank: true, :required => true %>
     </div>
     <div class="field">
-      <%= f.label :text %>
-      <%= f.text_area :text %>
+      <%= f.label :text, class: 'label-required' %>
+      <%= f.text_area :text, :required => true %>
     </div>
     <div class="field">
       <%= f.label :vzorak, "Vzorové riešenie" %>
