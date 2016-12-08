@@ -1,4 +1,5 @@
 <%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels_to_seria') do %>
+
     <div id="filter-org"></div>
     <table id="vyber-org" class="ui teal selectable celled striped table datatable">
       <thead>
@@ -38,15 +39,18 @@
       </tbody>
     </table>
 
-    <div class="ui grid container">
-      <div class="five wide column">Pridať do série:</div>
-      <div class="five wide column ui form"><select name="seria_id">
+    <div class="ui horizontal divider">
+      Pridať riešiteľov do série
+    </div>
+
+    <div class="ui centered grid container">
+      <div class="four wide column ui form"><select name="seria_id">
         <option value="">Vybrať sériu</option>
         <% Serium.order('rocnik DESC').each do |s| %>
             <option class='field' value="<%= s.id %>"><%= s.rocnik.to_s + '. ' + s.nazov %></option>
         <% end %>
       </select></div>
-      <div class="right aligned five wide column"><%= submit_tag "Pridať", class: 'ui green button' %>
+      <div class="three wide column"><%= submit_tag "Pridať", class: 'ui green button' %>
       </div>
     </div>
 <% end %>

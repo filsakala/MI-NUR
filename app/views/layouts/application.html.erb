@@ -25,30 +25,70 @@
     <div class="two column row">
       <div class="three wide column">
         <div class="ui fluid vertical menu">
-          <%= link_to priklads_path, class: 'item' do %>
-              <i class="gamepad icon"></i>
-              Príklady
-          <% end %>
-          <%= link_to riesitels_path, class: 'item' do %>
-              <i class="write icon"></i>
-              Riešitelia
-          <% end %>
-          <%= link_to organizators_path, class: 'item' do %>
-              <i class="spy icon"></i>
-              Organizátori
-          <% end %>
-          <% if Rocnik.all.count > 0 %>
-              <% r = Rocnik.all.order('cislo DESC').first %>
-              <%= link_to r, class: 'ui item' do %>
-                  <i class="wait icon"></i>
-                  <%= r.cislo %>. ročník
+
+          <% if params[:controller] == 'priklads' %>
+              <%= link_to priklads_path, class: 'item active' do %>
+                  <i class="gamepad icon"></i>
+                  Príklady
               <% end %>
           <% else %>
-              <%= link_to rocniks_path, class: 'ui item' do %>
-                  <i class="wait icon"></i>
-                  Ročníky
+              <%= link_to priklads_path, class: 'item' do %>
+                  <i class="gamepad icon"></i>
+                  Príklady
               <% end %>
           <% end %>
+
+          <% if params[:controller] == 'riesitels' or params[:controller] == 'riesitel_seria' %>
+              <%= link_to riesitels_path, class: 'item active' do %>
+                  <i class="help icon"></i>
+                  Riešitelia
+              <% end %>
+          <% else %>
+              <%= link_to riesitels_path, class: 'item' do %>
+                  <i class="help icon"></i>
+                  Riešitelia
+              <% end %>
+          <% end %>
+
+          <% if params[:controller] == 'organizators' %>
+              <%= link_to organizators_path, class: 'item active' do %>
+                  <i class="spy icon"></i>
+                  Organizátori
+              <% end %>
+          <% else %>
+              <%= link_to organizators_path, class: 'item' do %>
+                  <i class="spy icon"></i>
+                  Organizátori
+              <% end %>
+          <% end %>
+
+          <% if Rocnik.all.count > 0 %>
+              <% r = Rocnik.all.order('cislo DESC').first %>
+              <% if params[:controller] == 'rocniks' or params[:controller] == 'knizkas' or params[:controller] == 'kolos' %>
+                  <%= link_to r, class: 'ui item active' do %>
+                      <i class="wait icon"></i>
+                      <%= r.cislo %>. ročník
+                  <% end %>
+              <% else %>
+                  <%= link_to r, class: 'ui item' do %>
+                      <i class="wait icon"></i>
+                      <%= r.cislo %>. ročník
+                  <% end %>
+              <% end %>
+          <% else %>
+              <% if params[:controller] == 'rocniks' or params[:controller] == 'knizkas' or params[:controller] == 'kolos' %>
+                  <%= link_to rocniks_path, class: 'ui item active' do %>
+                      <i class="wait icon"></i>
+                      Ročníky
+                  <% end %>
+              <% else %>
+                  <%= link_to rocniks_path, class: 'ui item' do %>
+                      <i class="wait icon"></i>
+                      Ročníky
+                  <% end %>
+              <% end %>
+          <% end %>
+
         </div>
       </div>
       <div class="thirteen wide column">

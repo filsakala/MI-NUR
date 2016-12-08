@@ -82,6 +82,10 @@ class RiesitelsController < ApplicationController
     if !params[:meno].blank?
       save = true if params[:commit] == "Uložiť"
       params[:meno].each_with_index do |meno, i|
+        if save and meno.blank? and params[:priezvisko][i].blank? and params[:adresa][i].blank? and params[:dat_nar][i].blank? and params[:cislo][i].blank? and
+            params[:cislo_rodic][i].blank? and params[:email][i].blank?
+          next
+        end
         newRiesitel = Riesitel.new
         newRiesitel.meno = meno
         newRiesitel.priezvisko = params[:priezvisko][i]
