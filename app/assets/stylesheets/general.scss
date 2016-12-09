@@ -109,6 +109,19 @@ fieldset{
   }
 }
 
+.link-border{
+  max-width: 200px;
+  display: block;
+  border: 1px solid #E0E1E2;
+  border-radius: 0.28571429rem;
+  padding: 0.78571429em 1.2em 0.78571429em;
+  color: rgba(0, 0, 0, 0.8);
+  &:hover{
+    background-color: #E0E1E2;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
 
 
 

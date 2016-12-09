@@ -13,27 +13,27 @@
 
   <div class="field">
     <%= f.label :skola %><br>
-    <%= f.text_field :skola %>
+    <%= f.text_field :skola, :required => true %>
   </div>
   <div class="field">
     <%= f.label :trieda %><br>
-    <%= f.text_field :trieda %>
+    <%= f.text_field :trieda, :required => true %>
   </div>
   <div class="field">
     <%= f.label :kategoria %><br>
-    <%= f.number_field :kategoria %>
+    <%= f.number_field :kategoria, :required => true %>
   </div>
   <div class="field">
     <%= f.label :eriesitel %><br>
-    <%= f.check_box :eriesitel %>
+    <%= f.check_box :eriesitel, :required => true %>
   </div>
   <div class="field">
     <%= f.label :rocnik %><br>
-    <%= f.number_field :rocnik %>
+    <%= f.number_field :rocnik, :required => true %>
   </div>
   <div class="field">
     <%= f.label :seria %><br>
-    <%= f.text_field :seria %>
+    <%= f.text_field :seria, :required => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

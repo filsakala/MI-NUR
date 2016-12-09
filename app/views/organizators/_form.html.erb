@@ -10,8 +10,7 @@
       </ul>
     </div>
   <% end %>
-    <fieldset>
-      <legend>Osobné údaje</legend>
+
       <div class="field">
         <%= f.label :meno %><br>
         <%= f.text_field :meno %>
@@ -28,9 +27,6 @@
         <%= f.label :status %><br>
         <%= f.text_field :status %>
       </div>
-    </fieldset>
-    <fieldset>
-      <legend>Kontaktné údaje</legend>
       <div class="field">
         <%= f.label :email, class: 'label-required' %><br>
         <%= f.text_field :email, :type => 'email', :required => true %>
@@ -39,10 +35,6 @@
         <%= f.label :telefon, 'Telefón'%><br>
         <%= f.text_field :telefon %>
       </div>
-    </fieldset>
-
-    <fieldset id="fieldset-password">
-      <legend>Nastavenie hesla</legend>
       <div class="field">
         <label for="password" class="label-required">Heslo</label><br>
         <input name="password" id="password" type="password" required>
@@ -51,7 +43,6 @@
         <label for="password-confirm" class="label-required">Potvrďte heslo</label><br>
         <input name="password-confirm" id="password-confirm" type="password" required>
       </div>
-    </fieldset>
 
 
   <div class="actions">

@@ -55,19 +55,29 @@
     </h3>
     <div class="ui list">
       <% @knizky_z.each do |k| %>
-          <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
+          <div class="item">
+            <%= link_to k, class: 'link-border' do %>
+                <%= "#{k.cislo}. knižka" %>
+                <i class="unhide link icon"></i>
+            <% end %>
+          </div>
       <% end %>
     </div>
 
     <h3>Kolá</h3>
     <div class="ui list">
       <% @kola_z.each do |kolo| %>
-          <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+          <div class="item">
+            <%= link_to kolo, class: 'link-border' do %>
+                <%= "#{kolo.cislo}. kolo" %>
+                <i class="unhide link icon"></i>
+            <% end %>
+          </div>
       <% end %>
     </div>
 
     <h3>Riešitelia</h3>
-    <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+    <%= link_to "Pridať riešiteľov", riesitels_path, class: 'ui green button' %>
   </div>
   <div class="column">
     <h2>Letná séria</h2>
@@ -77,16 +87,26 @@
     </h3>
     <div class="ui list">
       <% @knizky_l.each do |k| %>
-          <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
+          <div class="item">
+            <%= link_to k, class: 'link-border' do %>
+                <%= "#{k.cislo}. knižka" %>
+                <i class="unhide link icon"></i>
+            <% end %>
+          </div>
       <% end %>
     </div>
     <h3>Kolá</h3>
     <div class="ui list">
       <% @kola_l.each do |kolo| %>
-          <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+          <div class="item">
+            <%= link_to kolo, class: 'link-border' do %>
+                <%= "#{kolo.cislo}. kolo" %>
+                <i class="unhide link icon"></i>
+            <% end %>
+          </div>
       <% end %>
     </div>
     <h3>Riešitelia</h3>
-    <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+    <%= link_to "Pridať riešiteľov", riesitels_path, class: 'ui green button' %>
   </div>
 </div>

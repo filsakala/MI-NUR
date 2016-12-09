@@ -20,24 +20,28 @@
                 <div class="ui list">
                   <% @aktualna_knizka.knizka_obsahs.order(:cislo).each do |k| %>
                       <div class="item">
-                        <%= k.nazov %>
                         <% if k.nazov.start_with?('Zadania') %>
-                            <%= link_to zadania_knizka_path(@aktualna_knizka, k.id) do %>
+                            <%= link_to zadania_knizka_path(@aktualna_knizka, k.id), class: 'link-border' do %>
+                                <%= k.nazov %>
                                 <i class="unhide link icon"></i>
                             <% end %>
                         <% elsif k.nazov.start_with?('Vzoráky') %>
-                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'link-border' do %>
+                                <%= k.nazov %>
                                 <i class="unhide link icon"></i>
                             <% end %>
                         <% elsif k.nazov.start_with?('Výsledkovka') %>
-                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'link-border' do %>
+                                <%= k.nazov %>
                                 <i class="unhide link icon"></i>
                             <% end %>
                         <% elsif k.nazov.start_with?('Článok') %>
-                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'link-border' do %>
+                                <%= k.nazov %>
                                 <i class="unhide link icon"></i>
                             <% end %>
-                            <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                            <%= link_to nil, data: { confirm: 'Not implemented.' }, class: 'link-border' do %>
+                                <%= k.nazov %>
                                 <i class="edit link icon"></i>
                             <% end %>
                         <% end %>
@@ -56,7 +60,7 @@
       <div class="header">
         <%= link_to rocnik_path(@aktualny_rocnik) do %>
             Ročník, séria
-            <i class="unhide icon"></i>
+            <i class="unhide link icon"></i>
         <% end %>
       </div>
       <div class="meta">
@@ -67,7 +71,12 @@
       <div class="header">Knižky</div>
       <div class="ui list">
         <% @knizky_l.each do |k| %>
-            <div class="item"><%= link_to "#{k.cislo}. knižka", k %></div>
+            <div class="item">
+              <%= link_to k, class: 'link-border' do %>
+                  <%= "#{k.cislo}. knižka" %>
+                  <i class="unhide link icon"></i>
+              <% end %>
+            </div>
         <% end %>
       </div>
     </div>
@@ -75,13 +84,18 @@
       <div class="header">Kolá</div>
       <div class="ui list">
         <% @kola_l.each do |kolo| %>
-            <div class="item"><%= link_to "#{kolo.cislo}. kolo", kolo %></div>
+            <div class="item">
+              <%= link_to kolo, class: 'link-border' do %>
+                  <%= "#{kolo.cislo}. kolo" %>
+                  <i class="unhide link icon"></i>
+              <% end %>
+            </div>
         <% end %>
       </div>
     </div>
     <div class="content">
       <div class="header">Riešitelia</div>
-      <%= link_to "Pridať riešiteľov", nil, data: { confirm: 'Not implemented.' }, class: 'ui green button' %>
+      <%= link_to "Pridať riešiteľov", riesitels_path, class: 'ui green button' %>
     </div>
   </div>
   <div class="card">

@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :rocnik %><br>
-    <%= f.number_field :rocnik %>
+    <%= f.number_field :rocnik, :required => true %>
   </div>
   <div class="field">
     <%= f.label :seria %><br>
-    <%= f.text_field :seria %>
+    <%= f.text_field :seria, :required => true %>
   </div>
   <div class="field">
     <%= f.label :kolo %><br>
-    <%= f.number_field :kolo %>
+    <%= f.number_field :kolo, :required => true %>
   </div>
   <div class="field">
     <%= f.label :priklady %><br>
-    <%= f.text_field :priklady %>
+    <%= f.text_field :priklady, :required => true %>
   </div>
   <div class="actions">
     <%= f.submit %>
