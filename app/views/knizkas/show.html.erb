@@ -69,44 +69,50 @@
       </thead>
 
       <tbody>
-      <% @knizka.knizka_obsahs.order(:cislo).each do |k| %>
-          <tr>
-            <td>
-              <% if k.cislo != 1 %>
-                  <i class="caret up link icon move_up" id="up<%= k.cislo %>"></i>
-              <% end %>
-              <% if k.cislo != @knizka.knizka_obsahs.count %>
-                  <i class="caret down link icon move_down" id="down<%= k.cislo %>"></i>
-              <% end %>
-            </td>
-            <td><%= k.cislo %>.</td>
-            <td id="prikladN<%= k.cislo %>"><%= k.nazov %></td>
-            <td id="prikladA<%= k.cislo %>">
-              <% if k.nazov.start_with?('Zadania') %>
-                  <%= link_to zadania_knizka_path(@knizka, k.id) do %>
-                      <i class="unhide link icon"></i>
+      <% if @knizka.knizka_obsahs.any? %>
+          <% @knizka.knizka_obsahs.order(:cislo).each do |k| %>
+              <tr>
+                <td>
+                  <% if k.cislo != 1 %>
+                      <i class="caret up link icon move_up" id="up<%= k.cislo %>"></i>
                   <% end %>
-              <% elsif k.nazov.start_with?('Vzoráky') %>
-                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                      <i class="unhide link icon"></i>
+                  <% if k.cislo != @knizka.knizka_obsahs.count %>
+                      <i class="caret down link icon move_down" id="down<%= k.cislo %>"></i>
                   <% end %>
-              <% elsif k.nazov.start_with?('Výsledkovka') %>
-                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                      <i class="unhide link icon"></i>
+                </td>
+                <td><%= k.cislo %>.</td>
+                <td id="prikladN<%= k.cislo %>"><%= k.nazov %></td>
+                <td id="prikladA<%= k.cislo %>">
+                  <% if k.nazov.start_with?('Zadania') %>
+                      <%= link_to zadania_knizka_path(@knizka, k.id) do %>
+                          <i class="unhide link icon"></i>
+                      <% end %>
+                  <% elsif k.nazov.start_with?('Vzoráky') %>
+                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                          <i class="unhide link icon"></i>
+                      <% end %>
+                  <% elsif k.nazov.start_with?('Výsledkovka') %>
+                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                          <i class="unhide link icon"></i>
+                      <% end %>
+                  <% elsif k.nazov.start_with?('Článok') %>
+                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                          <i class="unhide link icon"></i>
+                      <% end %>
+                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                          <i class="edit link icon"></i>
+                      <% end %>
                   <% end %>
-              <% elsif k.nazov.start_with?('Článok') %>
-                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                      <i class="unhide link icon"></i>
-                  <% end %>
-                  <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                      <i class="edit link icon"></i>
-                  <% end %>
-              <% end %>
 
-              <%= link_to remove_obsah_knizka_path(@knizka, k.id), method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
-                  <i class="remove link icon"></i>
-              <% end %>
-            </td>
+                  <%= link_to remove_obsah_knizka_path(@knizka, k.id), method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
+                      <i class="remove link icon"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+      <% else %>
+          <tr>
+            <td colspan="4">Neexistuje žiaden záznam.</td>
           </tr>
       <% end %>
       </tbody>
@@ -119,22 +125,26 @@
         <table class="ui teal selectable celled striped very compact small table">
           <thead>
           <tr>
-            <th class="two wide"></th>
+            <th class="two wide" colspan="2">Výber</th>
             <th class="fourteen wide">Názov</th>
           </tr>
           </thead>
 
-          <tbody>
+          <tbody id="clanok-container">
           <% @obsah.each do |o| %>
               <tr>
-                <td><%= check_box_tag "obsah[]", o[:id] %></td>
+                <td colspan="2"><%= check_box_tag "obsah[]", o[:id] %></td>
                 <td><%= o[:name] %></td>
               </tr>
           <% end %>
           <tr>
-            <td></td>
-            <td>Iný článok -
-              počet: <%= number_field_tag :clanok_cnt %></td>
+            <td><i class="green plus circle link icon" id="add-clanok"></i></td>
+            <td><i class="red minus circle link icon" id="remove-clanok"></i>
+            </td>
+            <td>Články
+              <span class="ui small blue circular label" id="pocet-clankov">0</span>
+            </td>
+            <%= hidden_field_tag :clanok_cnt, 0 %>
           </tr>
           </tbody>
         </table>
@@ -158,12 +168,18 @@
         </thead>
 
         <tbody>
-        <% @knizka.pdfs.order('created_at DESC').each do |pdf| %>
+        <% if @knizka.pdfs.any? %>
+            <% @knizka.pdfs.order('created_at DESC').each do |pdf| %>
+                <tr>
+                  <td><%= datetime_format pdf.created_at %></td>
+                  <td>
+                    <i class="unhide link icon refresh"></i>
+                  </td>
+                </tr>
+            <% end %>
+        <% else %>
             <tr>
-              <td><%= datetime_format pdf.created_at %></td>
-              <td>
-                <i class="unhide link icon refresh"></i>
-              </td>
+              <td colspan="2">Neexistuje žiaden záznam.</td>
             </tr>
         <% end %>
         </tbody>
