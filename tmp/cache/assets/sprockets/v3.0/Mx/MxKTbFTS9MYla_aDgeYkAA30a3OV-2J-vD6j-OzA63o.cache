@@ -1,0 +1,41 @@
+I"j(function() {
+  jQuery(function() {
+    $('.ui.dropdown').dropdown();
+    $('.datatable').DataTable();
+    $('.move_up').on("click", function() {
+      var act_tdA, act_tdN, id, prev_tdA, prev_tdN;
+      id = parseInt($(this).attr('id').split("up")[1], 10);
+      act_tdN = $('#prikladN' + id).html();
+      act_tdA = $('#prikladA' + id).html();
+      prev_tdN = $('#prikladN' + (id - 1)).html();
+      prev_tdA = $('#prikladA' + (id - 1)).html();
+      $('#prikladN' + id).html(prev_tdN);
+      $('#prikladA' + id).html(prev_tdA);
+      $('#prikladN' + (id - 1)).html(act_tdN);
+      return $('#prikladA' + (id - 1)).html(act_tdA);
+    });
+    $('.move_down').on("click", function() {
+      var act_tdA, act_tdN, id, prev_tdA, prev_tdN;
+      id = parseInt($(this).attr('id').split("down")[1], 10);
+      act_tdN = $('#prikladN' + id).html();
+      act_tdA = $('#prikladA' + id).html();
+      prev_tdN = $('#prikladN' + (id + 1)).html();
+      prev_tdA = $('#prikladA' + (id + 1)).html();
+      $('#prikladN' + id).html(prev_tdN);
+      $('#prikladA' + id).html(prev_tdA);
+      $('#prikladN' + (id + 1)).html(act_tdN);
+      return $('#prikladA' + (id + 1)).html(act_tdA);
+    });
+    $('.refresh').on("click", function() {
+      var path;
+      path = $('#refreshed').children('embed').attr('src');
+      return $('#refreshed').html("<embed src=\"" + path + "\" />");
+    });
+    $('.checkbox-clanok').on("click", function() {
+      return $('#clanok-container').append("<tr class='minus-clanok'> <td class='minus'>-</td> <td>Iný článok</td> </tr>");
+    });
+    return $('.minus-clanok').click($(this).remove());
+  });
+
+}).call(this);
+:ET

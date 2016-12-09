@@ -48,6 +48,9 @@ Rails.application.routes.draw do
       post :add_obsah
       delete :remove_obsah
       get :zadania
+      get :zadania_edit
+      post :zadania_edit
+      patch :zadania_edit
       get :vzoraky
       get :vysledkovka
       get :clanok

@@ -1,5 +1,5 @@
 class KnizkasController < ApplicationController
-  before_action :set_knizka, only: [:show, :edit, :update, :destroy, :add_obsah, :remove_obsah, :zadania, :vzoraky, :vysledkovka, :clanok, :gen_pdf]
+  before_action :set_knizka, only: [:show, :edit, :update, :destroy, :add_obsah, :remove_obsah, :zadania, :zadania_edit, :vzoraky, :vysledkovka, :clanok, :gen_pdf]
 
 
   def zadania
@@ -7,6 +7,28 @@ class KnizkasController < ApplicationController
     @c_kolo = @obsah.nazov.split('Zadania ')[1].split('. kola')[0]
     @kolo = Kolo.where(rocnik: @knizka.rocnik, seria: @knizka.seria, cislo: @c_kolo).take
     @priklady = @kolo.priklads.order(:cislo_v_kole)
+  end
+
+  def zadania_edit
+    @obsah = KnizkaObsah.find(params[:format])
+    @c_kolo = @obsah.nazov.split('Zadania ')[1].split('. kola')[0]
+    @kolo = Kolo.where(rocnik: @knizka.rocnik, seria: @knizka.seria, cislo: @c_kolo).take
+    @priklady = @kolo.priklads.order(:cislo_v_kole)
+
+    unless params[:commit].blank?
+      @priklady.each do |pr|
+        unless params["pred_t_#{pr.cislo_v_kole}"].blank?
+          pr.pred_t = params["pred_t_#{pr.cislo_v_kole}"]
+        end
+        unless params["text_#{pr.cislo_v_kole}"].blank?
+          pr.text = params["text_#{pr.cislo_v_kole}"]
+        end
+        unless params["po_t_#{pr.cislo_v_kole}"].blank?
+          pr.po_t = params["po_t_#{pr.cislo_v_kole}"]
+        end
+        pr.save
+      end
+    end
   end
 
   def vzoraky
@@ -71,7 +93,7 @@ class KnizkasController < ApplicationController
         @knizka.knizka_obsahs.create(nazov: 'Článok', cislo: (max + 1))
       end
     end
-    if !params[:obsah].blank? || !params[:clanok_cnt].blank?
+    if !params[:obsah].blank? || (!params[:clanok_cnt].blank? && params[:clanok_cnt].to_i != 0)
       redirect_to :back, notice: 'ok'
     else
       redirect_to :back, notice: 'nothing_added'

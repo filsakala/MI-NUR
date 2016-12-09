@@ -60,6 +60,20 @@ $(document).ready(function() {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
             } );
+        },
+        language: {
+            "lengthMenu": "Zobraz _MENU_ záznamov na stránku",
+            "zeroRecords": "Neexistuje žiaden záznam.",
+            "info": "Stránka _PAGE_ z _PAGES_",
+            "infoEmpty": "Prázdna",
+            "infoFiltered": "(filtrované z _MAX_ záznamov)",
+            "paginate": {
+                "first":      "First",
+                "last":       "Last",
+                "next":       "Nasledujúca",
+                "previous":   "Predchádzajúca"
+            },
+
         }
     } );
 
@@ -77,5 +91,7 @@ $(document).ready(function() {
             $("#password-notice").remove();
         }
     });
+
+
 
 } );
