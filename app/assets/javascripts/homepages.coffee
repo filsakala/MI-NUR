@@ -6,7 +6,22 @@ jQuery ->
   $('.ui.dropdown')
   .dropdown()
 
-  $('.datatable').DataTable();
+  $('.datatable').DataTable(
+    "language": {
+      "lengthMenu": "Zobraz _MENU_ záznamov na stránku",
+      "zeroRecords": "Neexistuje žiaden záznam.",
+      "info": "Stránka _PAGE_ z _PAGES_",
+      "infoEmpty": "Prázdna",
+      "infoFiltered": "(filtrované z _MAX_ záznamov)",
+      "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Nasledujúca",
+        "previous":   "Predchádzajúca"
+      },
+
+    }
+  );
 
   $('.move_up').on "click", ->
     id = parseInt($(this).attr('id').split("up")[1], 10)
@@ -53,3 +68,14 @@ jQuery ->
     $('#refreshed').html(
       "<embed src=\"" + path + "\" />"
     )
+
+  $('#add-clanok').on "click", ->
+    pocet = parseInt($('#pocet-clankov').html()) + 1
+    $('#pocet-clankov').html(pocet)
+    $('#clanok_cnt').attr('value', pocet)
+
+  $('#remove-clanok').on "click", ->
+    pocet = parseInt($('#pocet-clankov').html()) - 1
+    if pocet >= 0
+      $('#pocet-clankov').html(pocet)
+      $('#clanok_cnt').attr('value', pocet)

@@ -24,7 +24,15 @@
     </div>
 <% end %>
 
-<h1>Zadania <%= @c_kolo %>. kola</h1>
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Zadania <%= @c_kolo %>. kola</h1></div>
+  <div class="column">
+    <%= link_to zadania_edit_knizka_path(@knizka, @obsah.id) do %>
+        <i class="ui big right aligned yellow edit link icon"></i>
+    <% end %>
+  </div>
+</div>
 
 <% if @priklady.any? %>
     <table class="ui teal selectable celled striped very compact small table" style="border-collapse:collapse;">
@@ -33,10 +41,9 @@
           <tr>
             <td class="two wide column" rowspan="3" style="border-bottom: 2pt solid black;">
               <span class="ui label">Príklad <%= pr.cislo_v_kole %></span>
-              <%= link_to 'Upraviť', edit_priklad_priklad_path(pr, @obsah), class: 'ui yellow button' %>
             </td>
             <td>
-              <div class="ui teal label">Text pred príkladom</div>
+              <h5>Text pred príkladom</h5>
               <br>
               <% if !pr.pred_t.blank? %>
                   <%= pr.pred_t %>
@@ -47,7 +54,7 @@
           </tr>
           <tr>
             <td>
-              <div class="ui teal label">Text príkladu</div>
+              <h5>Text príkladu</h5>
               <br>
               <% if !pr.text.blank? %>
                   <%= pr.text %>
@@ -58,7 +65,7 @@
           </tr>
           <tr>
             <td style="border-bottom: 2pt solid black;">
-              <div class="ui teal label">Text po príklade</div>
+              <h5>Text po príklade</h5>
               <br>
               <% if !pr.po_t.blank? %>
                   <%= pr.po_t %>

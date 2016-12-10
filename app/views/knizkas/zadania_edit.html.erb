@@ -1,0 +1,86 @@
+<div class="ui fluid segment">
+  <div class="ui breadcrumb">
+    <%= link_to "Home", homepages_path, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@knizka.rocnik}. ročník", rocnik_path(Rocnik.find_by_cislo(@knizka.rocnik)), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="section"><%= @knizka.seria %> séria</div>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "#{@knizka.cislo}. knižka", @knizka, class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <%= link_to "Zadania", zadania_knizka_path(@knizka, @obsah.id), class: 'section' %>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Úprava zadaní</div>
+  </div>
+</div>
+
+<% if notice == 'priklad_edited' %>
+    <div class="ui green icon message">
+      <i class="check mark icon"></i>
+      <div class="content">
+        <div class="header">
+          Zadania boli úspešne upravené
+        </div>
+        <p>Skontroluj svoje zmeny.</p>
+      </div>
+    </div>
+<% end %>
+
+
+<div class="ui grid">
+  <div class="fourteen wide column"><h1>Úprava zadaní <%= @c_kolo %>. kola</h1>
+  </div>
+  <div class="column">
+    <%= link_to zadania_knizka_path(@knizka, @obsah.id) do %>
+        <i class="ui big right aligned arrow circle outline left link icon"></i>
+    <% end %>
+  </div>
+</div>
+
+<% if @priklady.any? %>
+    <%= form_tag zadania_edit_knizka_path(@knizka, @obsah.id), class: 'ui form' do %>
+        <table class="ui teal selectable celled striped very compact small table" style="border-collapse:collapse;">
+          <tbody>
+          <% @priklady.each do |pr| %>
+              <tr>
+                <td class="two wide column" rowspan="3" style="border-bottom: 2pt solid black;">
+                  <span class="ui label">Príklad <%= pr.cislo_v_kole %></span>
+                </td>
+                <td>
+                  <h5>Text pred príkladom</h5>
+                  <br>
+                  <%= text_area_tag "pred_t_#{pr.cislo_v_kole}", pr.pred_t %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>Text príkladu</h5>
+                  <br>
+                  <%= text_area_tag "text_#{pr.cislo_v_kole}", pr.text %>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-bottom: 2pt solid black;">
+                  <h5>Text po príklade</h5>
+                  <br>
+                  <%= text_area_tag "po_t_#{pr.cislo_v_kole}", pr.po_t %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= submit_tag "Uložiť", class: 'ui green button' %>
+    <% end %>
+<% else %>
+    <div class="ui yellow icon message">
+      <i class="info icon"></i>
+      <div class="content">
+        <div class="header">
+          Zadania neobsahujú žiadny príklad.
+        </div>
+        <p>Skús najprv nejaký pridať
+          v <%= link_to "kole", kolo_path(Kolo.where(rocnik: @knizka.rocnik, seria: @knizka.seria, cislo: @c_kolo).take) %>
+          .</p>
+      </div>
+    </div>
+<% end %>
