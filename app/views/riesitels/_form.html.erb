@@ -14,31 +14,31 @@
 
     <div class="field">
       <%= f.label :meno %>
-      <%= f.text_field :meno %>
+      <%= f.text_field :meno, :required => true %>
     </div>
     <div class="field">
       <%= f.label :priezvisko %>
-      <%= f.text_field :priezvisko %>
+      <%= f.text_field :priezvisko, :required => true %>
     </div>
     <div class="field">
       <%= f.label :adresa %>
-      <%= f.text_field :adresa %>
+      <%= f.text_field :adresa, :required => true %>
     </div>
     <div class="field">
       <%= f.label "Dátum narodenia" %>
-      <%= f.text_field :datum_narodenia %>
+      <%= f.text_field :datum_narodenia, :required => true %>
     </div>
     <div class="field">
       <%= f.label "Telefón" %>
-      <%= f.text_field :telefon %>
+      <%= f.text_field :telefon, :required => true %>
     </div>
     <div class="field">
       <%= f.label "Telefón na rodiča" %>
-      <%= f.text_field :telefon_rodic %>
+      <%= f.text_field :telefon_rodic, :required => true %>
     </div>
     <div class="field">
       <%= f.label :email %>
-      <%= f.email_field :email %>
+      <%= f.email_field :email, :required => true %>
     </div>
     <div class="actions">
       <%= f.submit "Uložiť", class: 'ui green button' %>

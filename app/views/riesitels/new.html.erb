@@ -42,25 +42,25 @@
       <% if @riesiteliaToAdd != nil
            @riesiteliaToAdd.each do |newRiesitel| %>
               <tr>
-                <td><%= text_field_tag "meno[]", newRiesitel.meno %></td>
-                <td><%= text_field_tag "priezvisko[]", newRiesitel.priezvisko %></td>
-                <td><%= text_field_tag "adresa[]", newRiesitel.adresa %></td>
-                <td><%= text_field_tag "dat_nar[]", newRiesitel.datum_narodenia %></td>
+                <td><%= text_field_tag "meno[]", newRiesitel.meno, :required => true %></td>
+                <td><%= text_field_tag "priezvisko[]", newRiesitel.priezvisko, :required => true %></td>
+                <td><%= text_field_tag "adresa[]", newRiesitel.adresa, :required => true %></td>
+                <td><%= text_field_tag "dat_nar[]", newRiesitel.datum_narodenia, :required => true %></td>
                 <td><%= text_field_tag "cislo[]", newRiesitel.telefon %></td>
                 <td><%= text_field_tag "cislo_rodic[]", newRiesitel.telefon_rodic %></td>
-                <td><%= text_field_tag "email[]", newRiesitel.email %></td>
+                <td><%= text_field_tag "email[]", newRiesitel.email, :required => true %></td>
               </tr>
           <% end %>
       <% end %>
       <% if @notice == nil %>
           <tr>
-            <td><%= text_field_tag "meno[]" %></td>
-            <td><%= text_field_tag "priezvisko[]" %></td>
-            <td><%= text_field_tag "adresa[]" %></td>
-            <td><%= text_field_tag "dat_nar[]" %></td>
+            <td><%= text_field_tag "meno[]", nil , :required => true %></td>
+            <td><%= text_field_tag "priezvisko[]", nil , :required => true %></td>
+            <td><%= text_field_tag "adresa[]", nil , :required => true %></td>
+            <td><%= text_field_tag "dat_nar[]", nil , :required => true %></td>
             <td><%= text_field_tag "cislo[]" %></td>
             <td><%= text_field_tag "cislo_rodic[]" %></td>
-            <td><%= text_field_tag "email[]" %></td>
+            <td><%= text_field_tag "email[]", nil , :required => true %></td>
           </tr>
       <% end %>
       </tbody>
