@@ -169,11 +169,9 @@ class KnizkasController < ApplicationController
   # DELETE /knizkas/1
   # DELETE /knizkas/1.json
   def destroy
+    rocnik = Rocnik.where(cislo: @knizka.rocnik).first
     @knizka.destroy
-    respond_to do |format|
-      format.html { redirect_to knizkas_url, notice: 'Knizka was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to url_for(:controller => 'rocniks', :action => 'show', id: rocnik.id), notice: 'knizka_deleted'
   end
 
   private
