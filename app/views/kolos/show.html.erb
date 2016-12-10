@@ -64,7 +64,7 @@
         <th class="one wide"></th>
         <th class="one wide">č.</th>
         <th class="eight wide">Názov</th>
-        <th class="six wide">Akcie</th>
+        <th class="six wide" colspan="3">Akcie</th>
       </tr>
       </thead>
 
@@ -85,13 +85,17 @@
                 <td id="prikladN<%= c %>"><%= p.nazov %></td>
                 <td id="prikladA<%= c %>">
                   <%= link_to p do %>
-                      <i class="unhide link icon"></i>
+                      <i class="blue unhide link icon"></i>
                   <% end %>
+                </td>
+                <td id="prikladA<%= c %>">
                   <%= link_to edit_priklad_path(p) do %>
-                      <i class="edit link icon"></i>
+                      <i class="yellow edit link icon"></i>
                   <% end %>
+                </td>
+                <td id="prikladA<%= c %>">
                   <%= link_to remove_priklad_kolo_path(@kolo, c), method: :delete, data: { confirm: 'Naozaj chceš odobrať tento príklad zo zadaní?' } do %>
-                      <i class="remove link icon"></i>
+                      <i class="red remove link icon"></i>
                   <% end %>
                 </td>
               </tr>
@@ -99,6 +103,8 @@
               <tr>
                 <td></td>
                 <td><%= c %></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
               </tr>
@@ -134,10 +140,10 @@
                 <td><%= priklad.stav %></td>
                 <td>
                   <%= link_to priklad do %>
-                      <i class="unhide link icon"></i>
+                      <i class="blue unhide link icon"></i>
                   <% end %>
                   <%= link_to edit_priklad_path(priklad) do %>
-                      <i class="edit link icon"></i>
+                      <i class="yellow edit link icon"></i>
                   <% end %>
                 </td>
               </tr>
@@ -149,7 +155,20 @@
   </div>
 </div>
 
-<!--<h2>Texty v zadaniach</h2>-->
-<!--<div class="ui">-->
-<!--<%= link_to "Zobraziť zadania", ??, class: 'ui green button' %>-->
-<!--</div>-->
+<h2>Texty v zadaniach</h2>
+<div class="ui">
+  <% if @knizka && @zadania %>
+      <%= link_to "Zobraziť zadania", zadania_knizka_path(@knizka, @zadania.id), class: 'ui green button' %>
+  <% else %>
+      <div class="ui yellow icon message">
+        <i class="info icon"></i>
+        <div class="content">
+          <div class="header">
+            Zadania tohoto kola nie sú v knižke.
+          </div>
+          <p>Aby bolo možné zobraziť texty, musíš najprv priradiť zadania do
+            knižky.</p>
+        </div>
+      </div>
+  <% end %>
+</div>

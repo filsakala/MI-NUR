@@ -28,6 +28,7 @@ class KnizkasController < ApplicationController
         end
         pr.save
       end
+      redirect_to :back, notice: 'zadania_edit'
     end
   end
 

@@ -12,7 +12,7 @@
         <th>Tel. č.</th>
         <th>Tel. č. rodiča</th>
         <th>Email</th>
-        <th>Akcia</th>
+        <th colspan="2">Akcia</th>
       </tr>
       </thead>
       <tbody>
@@ -28,10 +28,12 @@
             <td><%= riesitel.email %></td>
             <td>
               <%= link_to edit_riesitel_path(riesitel) do %>
-                  <i class="edit link icon"></i>
+                  <i class="yellow edit link icon"></i>
               <% end %>
+            </td>
+            <td>
               <%= link_to riesitel, method: :delete, data: { confirm: 'Naozaj chceš vymazať riešiteľa?' } do %>
-                  <i class="remove link icon"></i>
+                  <i class="red remove link icon"></i>
               <% end %>
             </td>
           </tr>
@@ -46,9 +48,7 @@
     <div class="ui centered grid container">
       <div class="four wide column ui form"><select name="seria_id">
         <option value="">Vybrať sériu</option>
-        <% Serium.order('rocnik DESC').each do |s| %>
-            <option class='field' value="<%= s.id %>"><%= s.rocnik.to_s + '. ' + s.nazov %></option>
-        <% end %>
+        <%= options_for_select(Serium.order('rocnik DESC').all.map{|s| ["#{s.rocnik.to_s}. #{s.nazov}", s.id]}, params[:seria_id]) %>
       </select></div>
       <div class="three wide column"><%= submit_tag "Pridať", class: 'ui green button' %>
       </div>

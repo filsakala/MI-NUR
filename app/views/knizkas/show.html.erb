@@ -64,7 +64,7 @@
         <th class="one wide"></th>
         <th class="one wide">Por.</th>
         <th class="eight wide">Názov</th>
-        <th class="six wide">Akcie</th>
+        <th class="six wide" colspan="3">Akcie</th>
       </tr>
       </thead>
 
@@ -85,27 +85,36 @@
                 <td id="prikladA<%= k.cislo %>">
                   <% if k.nazov.start_with?('Zadania') %>
                       <%= link_to zadania_knizka_path(@knizka, k.id) do %>
-                          <i class="unhide link icon"></i>
+                          <i class="blue unhide link icon"></i>
                       <% end %>
                   <% elsif k.nazov.start_with?('Vzoráky') %>
                       <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="unhide link icon"></i>
+                          <i class="blue unhide link icon"></i>
                       <% end %>
                   <% elsif k.nazov.start_with?('Výsledkovka') %>
                       <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="unhide link icon"></i>
+                          <i class="blue unhide link icon"></i>
                       <% end %>
                   <% elsif k.nazov.start_with?('Článok') %>
                       <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="unhide link icon"></i>
-                      <% end %>
-                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="edit link icon"></i>
+                          <i class="blue unhide link icon"></i>
                       <% end %>
                   <% end %>
-
+                </td>
+                <td>
+                  <% if k.nazov.start_with?('Zadania') %>
+                      <%= link_to zadania_edit_knizka_path(@knizka, k.id) do %>
+                          <i class="yellow edit link icon"></i>
+                      <% end %>
+                  <% elsif k.nazov.start_with?('Článok') %>
+                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
+                          <i class="yellow edit link icon"></i>
+                      <% end %>
+                  <% end %>
+                </td>
+                <td>
                   <%= link_to remove_obsah_knizka_path(@knizka, k.id), method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
-                      <i class="remove link icon"></i>
+                      <i class="red remove link icon"></i>
                   <% end %>
                 </td>
               </tr>
@@ -173,7 +182,7 @@
                 <tr>
                   <td><%= datetime_format pdf.created_at %></td>
                   <td>
-                    <i class="unhide link icon refresh"></i>
+                    <i class="blue unhide link icon refresh"></i>
                   </td>
                 </tr>
             <% end %>

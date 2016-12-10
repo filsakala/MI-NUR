@@ -50,7 +50,7 @@
           <option value="/rocniks/<%= r.id %>"><%= r.name %></option>
       <% end %>
     </select>
-    <%= link_to new_rocnik_path, data: {confirm: 'Naozaj chceš pridať ročník?'} do %>
+    <%= link_to new_rocnik_path, data: { confirm: 'Naozaj chceš pridať ročník?' } do %>
         <i class="ui big right aligned green plus circle link icon"></i>
     <% end %>
   </div>
@@ -59,20 +59,22 @@
 <div class="ui two column grid">
   <div class="column">
     <h2>Zimná séria</h2>
-    <h3>Knižky<%= link_to new_serium_knizka_path(@seria_z), data: {confirm: 'Naozaj chceš pridať knižku do zimnej série?'} do %>
+    <h3>Knižky<%= link_to new_serium_knizka_path(@seria_z), data: { confirm: 'Naozaj chceš pridať knižku do zimnej série?' } do %>
           <i class="ui right aligned green plus circle link icon"></i>
       <% end %>
     </h3>
     <div class="ui list">
       <% @knizky_z.each do |k| %>
           <div class="item">
-            <%= link_to k, class: 'link-border' do %>
-                <%= "#{k.cislo}. knižka" %>
-                <i class="unhide link icon"></i>
-            <% end %>
-            <%= link_to k, method: :delete, data: {confirm: "Naozaj chceš vymazať knižku #{k.cislo}. ?"} do %>
-                <i class="remove link icon"></i>
-            <% end %>
+            <span class="link-border">
+                <%= link_to k do %>
+                    <%= "#{k.cislo}. knižka" %>
+                  <i class="blue unhide link icon"></i>
+                <% end %>
+              <%= link_to k, method: :delete, data: { confirm: "Naozaj chceš vymazať knižku #{k.cislo}. ?" } do %>
+                    <i class="red remove link icon"></i>
+                <% end %>
+            </span>
           </div>
       <% end %>
     </div>
@@ -83,32 +85,36 @@
           <div class="item">
             <%= link_to kolo, class: 'link-border' do %>
                 <%= "#{kolo.cislo}. kolo" %>
-                <i class="unhide link icon"></i>
+                <i class="blue unhide link icon"></i>
             <% end %>
           </div>
       <% end %>
     </div>
 
     <h3>Riešitelia</h3>
-    <%= link_to "Pridať riešiteľov", riesitels_path, class: 'ui green button' %>
+    <%= link_to riesitels_path(seria_id: @seria_z.id), class: 'link-border' do %>
+        Pridať riešiteľov
+        <i class="green plus circle link icon"></i>
+    <% end %>
   </div>
   <div class="column">
     <h2>Letná séria</h2>
-    <h3>Knižky<%= link_to new_serium_knizka_path(@seria_l), data: {confirm: 'Naozaj chceš pridať knižku do letnej série?'} do %>
+    <h3>Knižky<%= link_to new_serium_knizka_path(@seria_l), data: { confirm: 'Naozaj chceš pridať knižku do letnej série?' } do %>
           <i class="ui right aligned green plus circle link icon"></i>
       <% end %>
     </h3>
     <div class="ui list">
       <% @knizky_l.each do |k| %>
           <div class="item">
-            <%= link_to k, class: 'link-border' do %>
-                <%= "#{k.cislo}. knižka" %>
-                <i class="unhide link icon"></i>
-            <% end %>
-            <%= link_to "#{k.cislo}. knižka", k %>
-            <%= link_to k, method: :delete, data: {confirm: "Naozaj chceš vymazať knižku #{k.cislo}. ?"} do %>
-                <i class="remove link icon"></i>
-            <% end %>
+            <span class="link-border">
+                <%= link_to k do %>
+                    <%= "#{k.cislo}. knižka" %>
+                  <i class="blue unhide link icon"></i>
+                <% end %>
+              <%= link_to k, method: :delete, data: { confirm: "Naozaj chceš vymazať knižku #{k.cislo}. ?" } do %>
+                    <i class="red remove link icon"></i>
+                <% end %>
+            </span>
           </div>
       <% end %>
     </div>
@@ -118,12 +124,15 @@
           <div class="item">
             <%= link_to kolo, class: 'link-border' do %>
                 <%= "#{kolo.cislo}. kolo" %>
-                <i class="unhide link icon"></i>
+                <i class="blue unhide link icon"></i>
             <% end %>
           </div>
       <% end %>
     </div>
     <h3>Riešitelia</h3>
-    <%= link_to "Pridať riešiteľov", riesitels_path, class: 'ui green button' %>
+    <%= link_to riesitels_path(seria_id: @seria_l.id), class: 'link-border' do %>
+        Pridať riešiteľov
+        <i class="green plus circle link icon"></i>
+    <% end %>
   </div>
 </div>

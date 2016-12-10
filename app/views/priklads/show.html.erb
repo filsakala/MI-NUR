@@ -54,12 +54,12 @@
   <div class="fourteen wide column"><h1>Príklad <%= @priklad.nazov %></h1></div>
   <div class="column">
     <%= link_to edit_priklad_path(@priklad) do %>
-        <i class="ui big right aligned edit link icon"></i>
+        <i class="ui big right aligned yellow edit link icon"></i>
     <% end %>
   </div>
   <div class="column">
     <%= link_to @priklad, method: :delete, data: { confirm: 'Naozaj chceš vymazať tento príklad?' } do %>
-        <i class="ui big right aligned remove link icon"></i>
+        <i class="ui big right aligned red remove link icon"></i>
     <% end %>
   </div>
 </div>

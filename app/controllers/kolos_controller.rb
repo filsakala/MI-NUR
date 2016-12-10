@@ -11,6 +11,10 @@ class KolosController < ApplicationController
   # GET /kolos/1.json
   def show
     @priklads = Priklad.where(kolo_id: nil)
+    @knizka = Knizka.where(rocnik: @kolo.rocnik, seria: @kolo.seria).take
+    if @knizka
+      @zadania = @knizka.knizka_obsahs.where(nazov: "Zadania #{@kolo.cislo}. kola").take
+    end
   end
 
   def add_priklads

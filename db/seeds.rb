@@ -337,3 +337,10 @@ Knizka.create(rocnik: 18, seria: 'Zimná', cislo: 0)
 Knizka.create(rocnik: 18, seria: 'Letná', cislo: 0)
 Knizka.create(rocnik: 19, seria: 'Zimná', cislo: 0)
 Knizka.create(rocnik: 19, seria: 'Letná', cislo: 0)
+
+Riesitel.create(meno: 'Peter', priezvisko: 'Nový', adresa: 'Biela 5, Bratislava', datum_narodenia: '12.05.2002', email: 'peter@novy.sk')
+Riesitel.create(meno: 'Pavol', priezvisko: 'Múdry', adresa: 'Orgovánová 24, Bratislava', datum_narodenia: '05.12.2002', email: 'p@mudry.sk')
+Riesitel.create(meno: 'Anna', priezvisko: 'Dobrá', adresa: 'Hlavná 1, Bratislava', datum_narodenia: '01.10.2000', email: 'a@dobra.sk')
+
+Organizator.create(meno: "Marianna", priezvisko: "Vtipná", email: 'marianna@vtipna.sk')
+Organizator.create(email: 'zatial@bezmena.sk')

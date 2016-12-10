@@ -10,6 +10,7 @@ class HomepagesController < ApplicationController
     @aktualna_knizka = Knizka.where(rocnik: @aktualny_rocnik.cislo).order('seria ASC').order('cislo DESC').first
     @kola_l = Kolo.where(rocnik: @aktualny_rocnik.cislo, seria: 'Letná').order(:cislo)
     @knizky_l = Knizka.where(rocnik: @aktualny_rocnik.cislo, seria: 'Letná').order(:cislo)
+    @seria_l = Serium.where(rocnik: @aktualny_rocnik.cislo, nazov: 'Letná').take
   end
 
   def login
