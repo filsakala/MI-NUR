@@ -82,6 +82,14 @@ class RiesitelsController < ApplicationController
     if !params[:meno].blank?
       save = true if params[:commit] == "Uložiť"
       params[:meno].each_with_index do |meno, i|
+        if save and meno.blank? and params[:priezvisko][i].blank? and params[:adresa][i].blank? and params[:dat_nar][i].blank? and params[:cislo][i].blank? and
+            params[:cislo_rodic][i].blank? and params[:email][i].blank?
+          next
+        end
+        if save and (meno.blank? or params[:priezvisko][i].blank? or params[:adresa][i].blank? or params[:dat_nar][i].blank?)
+          save = false
+          @notice = 'Polia meno, priezvisko, adresa a dátum narodenia nemôžu byť prázdne!'
+        end
         newRiesitel = Riesitel.new
         newRiesitel.meno = meno
         newRiesitel.priezvisko = params[:priezvisko][i]
@@ -90,11 +98,17 @@ class RiesitelsController < ApplicationController
         newRiesitel.telefon = params[:cislo][i]
         newRiesitel.telefon_rodic = params[:cislo_rodic][i]
         newRiesitel.email = params[:email][i]
-        newRiesitel.save if save
         @riesiteliaToAdd << newRiesitel
       end
       if save
-        redirect_to riesitels_path, notice: "riesitel_add"
+        if @riesiteliaToAdd.size == 0
+          redirect_to riesitels_path
+        else
+          @riesiteliaToAdd.each do |r|
+            r.save
+          end
+          redirect_to riesitels_path, notice: "riesitel_add"
+        end
         return
       end
     end
