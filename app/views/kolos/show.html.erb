@@ -53,7 +53,7 @@
 <% end %>
 
 <h1><%= @kolo.cislo %>. kolo</h1>
-<h2>Príklady v zadaniach</h2>
+<h2>Príklady v kole</h2>
 
 <div class="ui two column grid">
   <div class="column">
@@ -163,7 +163,7 @@
             Zadania tohoto kola nie sú v knižke.
           </div>
           <p>Aby bolo možné zobraziť texty, musíš najprv priradiť zadania do
-            knižky.</p>
+             <%= link_to "knižky", rocnik_path(Rocnik.find_by_cislo(@kolo.rocnik)), style: 'color: #B58105; text-decoration: underline;' %>.</p>
         </div>
       </div>
   <% end %>
