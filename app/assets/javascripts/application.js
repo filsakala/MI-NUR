@@ -92,6 +92,10 @@ $(document).ready(function() {
         }
     });
 
-
+    // Klik na td -> klik na checkbox
+    $(document).on('mousedown', 'td', function () {
+        var target = $(this).find('input[type="checkbox"]');
+        target.click();
+    });
 
 } );

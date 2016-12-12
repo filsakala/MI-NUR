@@ -28,7 +28,7 @@ class KnizkasController < ApplicationController
         end
         pr.save
       end
-      redirect_to :back, notice: 'zadania_edit'
+      redirect_to zadania_knizka_path(@knizka, @obsah.id), notice: 'zadania_edit'
     end
   end
 
