@@ -12,7 +12,7 @@
         <th>Tel. č.</th>
         <th>Tel. č. rodiča</th>
         <th>Email</th>
-        <th colspan="2">Akcia</th>
+        <th>Akcia</th>
       </tr>
       </thead>
       <tbody>
@@ -27,14 +27,14 @@
             <td><%= riesitel.telefon_rodic %></td>
             <td><%= riesitel.email %></td>
             <td>
-              <%= link_to edit_riesitel_path(riesitel) do %>
-                  <i class="yellow edit link icon"></i>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to riesitel, method: :delete, data: { confirm: 'Naozaj chceš vymazať riešiteľa?' } do %>
-                  <i class="red remove link icon"></i>
-              <% end %>
+              <div class="ui basic buttons">
+                <%= link_to edit_riesitel_path(riesitel), class: 'ui button' do %>
+                    <i class="yellow edit link icon"></i>
+                <% end %>
+                <%= link_to riesitel, class: 'ui button', method: :delete, data: { confirm: 'Naozaj chceš vymazať riešiteľa?' } do %>
+                    <i class="red remove link icon"></i>
+                <% end %>
+              </div>
             </td>
           </tr>
       <% end %>

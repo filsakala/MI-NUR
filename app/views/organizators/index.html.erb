@@ -53,7 +53,7 @@
     <th>Status</th>
     <th>Email</th>
     <th>Telefon</th>
-    <th colspan="2">Akcie</th>
+    <th>Akcie</th>
   </tr>
   </thead>
 
@@ -67,14 +67,14 @@
         <td><%= organizator.email %></td>
         <td><%= organizator.telefon %></td>
         <td>
-          <%= link_to edit_organizator_path(organizator) do %>
-              <i class="yellow edit link icon"></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to organizator, method: :delete, data: { confirm: 'Naozaj chceš vymazať organizátora?' } do %>
-              <i class="red remove link icon"></i>
-          <% end %>
+          <div class="ui basic buttons">
+            <%= link_to edit_organizator_path(organizator), class: 'ui button' do %>
+                <i class="yellow edit link icon"></i>
+            <% end %>
+            <%= link_to organizator, class: 'ui button', method: :delete, data: { confirm: 'Naozaj chceš vymazať organizátora?' } do %>
+                <i class="red remove link icon"></i>
+            <% end %>
+          </div>
         </td>
       </tr>
   <% end %>

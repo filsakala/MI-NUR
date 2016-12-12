@@ -64,7 +64,7 @@
         <th class="one wide"></th>
         <th class="one wide">č.</th>
         <th class="eight wide">Názov</th>
-        <th class="six wide" colspan="3">Akcie</th>
+        <th class="six wide">Akcie</th>
       </tr>
       </thead>
 
@@ -84,27 +84,23 @@
                 <td><%= c %></td>
                 <td id="prikladN<%= c %>"><%= p.nazov %></td>
                 <td id="prikladA<%= c %>">
-                  <%= link_to p do %>
-                      <i class="blue unhide link icon"></i>
-                  <% end %>
-                </td>
-                <td id="prikladA<%= c %>">
-                  <%= link_to edit_priklad_path(p) do %>
-                      <i class="yellow edit link icon"></i>
-                  <% end %>
-                </td>
-                <td id="prikladA<%= c %>">
-                  <%= link_to remove_priklad_kolo_path(@kolo, c), method: :delete, data: { confirm: 'Naozaj chceš odobrať tento príklad zo zadaní?' } do %>
-                      <i class="red remove link icon"></i>
-                  <% end %>
+                  <div class="ui basic buttons">
+                    <%= link_to p, class: 'ui button' do %>
+                        <i class="blue unhide link icon"></i>
+                    <% end %>
+                    <%= link_to edit_priklad_path(p), class: 'ui button' do %>
+                        <i class="yellow edit link icon"></i>
+                    <% end %>
+                    <%= link_to remove_priklad_kolo_path(@kolo, c), class: 'ui button', method: :delete, data: { confirm: 'Naozaj chceš odobrať tento príklad zo zadaní?' } do %>
+                        <i class="red remove link icon"></i>
+                    <% end %>
+                  </div>
                 </td>
               </tr>
           <% else %>
               <tr>
                 <td></td>
                 <td><%= c %></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
               </tr>

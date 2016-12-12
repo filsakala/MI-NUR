@@ -64,7 +64,7 @@
         <th class="one wide"></th>
         <th class="one wide">Por.</th>
         <th class="eight wide">Názov</th>
-        <th class="six wide" colspan="3">Akcie</th>
+        <th class="six wide">Akcie</th>
       </tr>
       </thead>
 
@@ -83,39 +83,37 @@
                 <td><%= k.cislo %>.</td>
                 <td id="prikladN<%= k.cislo %>"><%= k.nazov %></td>
                 <td id="prikladA<%= k.cislo %>">
-                  <% if k.nazov.start_with?('Zadania') %>
-                      <%= link_to zadania_knizka_path(@knizka, k.id) do %>
-                          <i class="blue unhide link icon"></i>
-                      <% end %>
-                  <% elsif k.nazov.start_with?('Vzoráky') %>
-                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="blue unhide link icon"></i>
-                      <% end %>
-                  <% elsif k.nazov.start_with?('Výsledkovka') %>
-                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="blue unhide link icon"></i>
-                      <% end %>
-                  <% elsif k.nazov.start_with?('Článok') %>
-                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="blue unhide link icon"></i>
-                      <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  <% if k.nazov.start_with?('Zadania') %>
-                      <%= link_to zadania_edit_knizka_path(@knizka, k.id) do %>
-                          <i class="yellow edit link icon"></i>
-                      <% end %>
-                  <% elsif k.nazov.start_with?('Článok') %>
-                      <%= link_to nil, data: { confirm: 'Not implemented.' } do %>
-                          <i class="yellow edit link icon"></i>
-                      <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to remove_obsah_knizka_path(@knizka, k.id), method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
-                      <i class="red remove link icon"></i>
-                  <% end %>
+                  <div class="ui basic buttons">
+                    <% if k.nazov.start_with?('Zadania') %>
+                        <%= link_to zadania_knizka_path(@knizka, k.id), class: 'ui button' do %>
+                            <i class="blue unhide link icon"></i>
+                        <% end %>
+                    <% elsif k.nazov.start_with?('Vzoráky') %>
+                        <%= link_to nil, class: 'ui button', data: { confirm: 'Not implemented.' } do %>
+                            <i class="blue unhide link icon"></i>
+                        <% end %>
+                    <% elsif k.nazov.start_with?('Výsledkovka') %>
+                        <%= link_to nil, class: 'ui button', data: { confirm: 'Not implemented.' } do %>
+                            <i class="blue unhide link icon"></i>
+                        <% end %>
+                    <% elsif k.nazov.start_with?('Článok') %>
+                        <%= link_to nil, class: 'ui button', data: { confirm: 'Not implemented.' } do %>
+                            <i class="blue unhide link icon"></i>
+                        <% end %>
+                    <% end %>
+                    <% if k.nazov.start_with?('Zadania') %>
+                        <%= link_to zadania_edit_knizka_path(@knizka, k.id), class: 'ui button' do %>
+                            <i class="yellow edit link icon"></i>
+                        <% end %>
+                    <% elsif k.nazov.start_with?('Článok') %>
+                        <%= link_to nil, class: 'ui button', data: { confirm: 'Not implemented.' } do %>
+                            <i class="yellow edit link icon"></i>
+                        <% end %>
+                    <% end %>
+                    <%= link_to remove_obsah_knizka_path(@knizka, k.id), class: 'ui button', method: :delete, data: { confirm: 'Naozaj chceš vymazať túto časť knižky?' } do %>
+                        <i class="red remove link icon"></i>
+                    <% end %>
+                  </div>
                 </td>
               </tr>
           <% end %>

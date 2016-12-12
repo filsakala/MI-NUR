@@ -37,7 +37,7 @@
     <th>Stav</th>
     <th>Komentáre</th>
     <th>Upravené</th>
-    <th colspan="3">Akcie</th>
+    <th>Akcie</th>
   </tr>
   </thead>
   <tbody>
@@ -50,19 +50,17 @@
         <td><%= priklad.komentars.count %></td>
         <td><%= datetime_format priklad.updated_at %></td>
         <td>
-          <%= link_to priklad do %>
-              <i class="blue unhide link icon"></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to edit_priklad_path(priklad) do %>
-              <i class="yellow edit link icon"></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to priklad, method: :delete, data: { confirm: 'Naozaj chceš vymazať príklad?' } do %>
-              <i class="red remove link icon"></i>
-          <% end %>
+          <div class="ui basic buttons">
+            <%= link_to priklad, class: 'ui button' do %>
+                <i class="blue unhide link icon"></i>
+            <% end %>
+            <%= link_to edit_priklad_path(priklad), class: 'ui button' do %>
+                <i class="yellow edit link icon"></i>
+            <% end %>
+            <%= link_to priklad, class: 'ui button', method: :delete, data: { confirm: 'Naozaj chceš vymazať príklad?' } do %>
+                <i class="red remove link icon"></i>
+            <% end %>
+          </div>
         </td>
       </tr>
   <% end %>
