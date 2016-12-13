@@ -93,9 +93,12 @@ $(document).ready(function() {
     });
 
     // Klik na td -> klik na checkbox
-    $(document).on('mousedown', 'td', function () {
+    $(document).on('click', 'td', function () {
         var target = $(this).find('input[type="checkbox"]');
         target.click();
     });
 
+    $(document).on('click', 'input[type="checkbox"]', function () {
+        $(this).click();
+    });
 } );
