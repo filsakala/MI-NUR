@@ -4,7 +4,11 @@
     <i class="right chevron icon divider"></i>
     <%= link_to "Riešitelia", riesitels_path, class: 'section' %>
     <i class="right chevron icon divider"></i>
-    <div class="active section">Riešitelia série</div>
+    <% if !params[:riesitelia_ids].blank? %>
+        <div class="active section">Krok 2: Noví riešitelia série</div>
+    <% else %>
+        <div class="active section">Zoznam riešiteľov série</div>
+    <% end %>
   </div>
 </div>
 
@@ -26,6 +30,50 @@
           Údaje riešiteľov boli úspešne uložené.
         </div>
         <p>Teraz si môžeš prezerať údaje všetkých riešiteľov tejto série.</p>
+      </div>
+    </div>
+<% end %>
+
+<% if !params[:riesitelia_ids].blank? && false %>
+    <div class="ui three ordered fluid steps">
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Výber riešiteľov</div>
+          <div class="description">Výber zo všetkých pridaných riešiteľov</div>
+        </div>
+      </div>
+      <div class="active step">
+        <div class="content">
+          <div class="title">Úprava údajov</div>
+          <div class="description">Práve pridaní riešitelia série</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Zoznam riešiteľov</div>
+          <div class="description">Všetci riešitelia série</div>
+        </div>
+      </div>
+    </div>
+<% elsif false %>
+    <div class="ui three ordered fluid steps">
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Výber riešiteľov</div>
+          <div class="description">Výber zo všetkých pridaných riešiteľov</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Úprava údajov</div>
+          <div class="description">Práve pridaní riešitelia série</div>
+        </div>
+      </div>
+      <div class="active step">
+        <div class="content">
+          <div class="title">Zoznam riešiteľov</div>
+          <div class="description">Všetci riešitelia série</div>
+        </div>
       </div>
     </div>
 <% end %>

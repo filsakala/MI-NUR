@@ -44,15 +44,18 @@
       /<%= @rocnik.cislo + 1998 %></h1>
   </div>
   <div class="eight wide right aligned column">
-    <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value" class="field">
-      <option value="/rocniks/<%= @rocnik.id %>">Zmeniť ročník</option>
-      <% Rocnik.order('cislo DESC').each do |r| %>
-          <option value="/rocniks/<%= r.id %>"><%= r.name %></option>
+
+    <h2>
+      <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value" class="field">
+        <option value="/rocniks/<%= @rocnik.id %>">Zmeniť ročník</option>
+        <% Rocnik.order('cislo DESC').each do |r| %>
+            <option value="/rocniks/<%= r.id %>"><%= r.name %></option>
+        <% end %>
+      </select>
+      <%= link_to new_rocnik_path, data: { confirm: 'Naozaj chceš pridať ročník?' } do %>
+          <i class="ui big right aligned green plus circle link icon"></i>
       <% end %>
-    </select>
-    <%= link_to new_rocnik_path, data: { confirm: 'Naozaj chceš pridať ročník?' } do %>
-        <i class="ui big right aligned green plus circle link icon"></i>
-    <% end %>
+    </h2>
   </div>
 </div>
 
@@ -92,6 +95,10 @@
     </div>
 
     <h3>Riešitelia</h3>
+    <%= link_to riesitelia_serie_riesitel_seria_path(id: @seria_z.id), class: 'link-border' do %>
+        Pridaní riešitelia
+        <i class="blue unhide link icon"></i>
+    <% end %>
     <%= link_to riesitels_path(seria_id: @seria_z.id), class: 'link-border' do %>
         Pridať riešiteľov
         <i class="green plus circle link icon"></i>
@@ -130,6 +137,10 @@
       <% end %>
     </div>
     <h3>Riešitelia</h3>
+    <%= link_to riesitelia_serie_riesitel_seria_path(id: @seria_l.id), class: 'link-border' do %>
+        Pridaní riešitelia
+        <i class="blue unhide link icon"></i>
+    <% end %>
     <%= link_to riesitels_path(seria_id: @seria_l.id), class: 'link-border' do %>
         Pridať riešiteľov
         <i class="green plus circle link icon"></i>

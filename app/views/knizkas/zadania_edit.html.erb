@@ -18,9 +18,11 @@
   <div class="fourteen wide column"><h1>Úprava zadaní <%= @c_kolo %>. kola</h1>
   </div>
   <div class="column">
-    <%= link_to zadania_knizka_path(@knizka, @obsah.id) do %>
-        <i class="ui big right aligned arrow circle outline left link icon"></i>
-    <% end %>
+    <h1>
+      <%= link_to zadania_knizka_path(@knizka, @obsah.id) do %>
+          <i class="ui large right aligned arrow circle outline left link icon"></i>
+      <% end %>
+    </h1>
   </div>
 </div>
 

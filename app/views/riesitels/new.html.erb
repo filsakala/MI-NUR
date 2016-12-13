@@ -1,3 +1,54 @@
+<script>
+  function add_row(i) {
+    $('#addr' + i).html(
+        '<td><%= text_field_tag "meno[]", nil, :required => true %></td>' +
+        '<td><%= text_field_tag "priezvisko[]", nil, :required => true %></td>' +
+        '<td><%= text_field_tag "adresa[]", nil, :required => true %></td>' +
+        '<td><%= text_field_tag "dat_nar[]", nil, :required => true %></td>' +
+        '<td><%= text_field_tag "cislo[]", nil %></td>' +
+        '<td><%= text_field_tag "cislo_rodic[]", nil %></td>' +
+        '<td><%= text_field_tag "email[]", nil, :required => true %></td>'
+    );
+
+    $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+    i++;
+    return i;
+  }
+
+  function delete_row(i) {
+    if (i > 1) {
+      $("#addr" + (i - 1)).html('');
+      i--;
+    }
+    return i;
+  }
+
+  $(document).ready(function () {
+    var i = 1;
+
+    $("#add_row").click(function () {
+      i = add_row(i);
+    });
+
+    $("#delete_row").click(function () {
+      i = delete_row(i)
+    });
+
+    $("#add_5_rows").click(function () {
+      for (j = 0; j < 5; j++) {
+        i = add_row(i);
+      }
+    });
+
+    $("#delete_5_rows").click(function () {
+      for (j = 0; j < 5; j++) {
+        i = delete_row(i);
+      }
+    });
+
+  });
+</script>
+
 <div class="ui fluid segment">
   <div class="ui breadcrumb">
     <%= link_to "Home", homepages_path, class: 'section' %>
@@ -25,7 +76,7 @@
 </div>
 
 <%= form_tag url_for(:controller => 'riesitels', :action => 'add_riesitels'), class: 'ui form' do |f| %>
-    <table class="ui teal selectable celled table">
+    <table id="tab_logic" class="ui teal selectable celled table">
       <thead>
       <tr>
         <th>Meno</th>
@@ -40,8 +91,8 @@
 
       <tbody>
       <% if @riesiteliaToAdd != nil
-           @riesiteliaToAdd.each do |newRiesitel| %>
-              <tr>
+           @riesiteliaToAdd.each_with_index do |newRiesitel, i| %>
+              <tr id="addr<%= i %>">
                 <td><%= text_field_tag "meno[]", newRiesitel.meno, :required => true %></td>
                 <td><%= text_field_tag "priezvisko[]", newRiesitel.priezvisko, :required => true %></td>
                 <td><%= text_field_tag "adresa[]", newRiesitel.adresa, :required => true %></td>
@@ -54,26 +105,21 @@
       <% end %>
       <% if @notice == nil %>
           <tr>
-            <td><%= text_field_tag "meno[]", nil , :required => true %></td>
-            <td><%= text_field_tag "priezvisko[]", nil , :required => true %></td>
-            <td><%= text_field_tag "adresa[]", nil , :required => true %></td>
-            <td><%= text_field_tag "dat_nar[]", nil , :required => true %></td>
+            <td><%= text_field_tag "meno[]", nil, :required => true %></td>
+            <td><%= text_field_tag "priezvisko[]", nil, :required => true %></td>
+            <td><%= text_field_tag "adresa[]", nil, :required => true %></td>
+            <td><%= text_field_tag "dat_nar[]", nil, :required => true %></td>
             <td><%= text_field_tag "cislo[]" %></td>
             <td><%= text_field_tag "cislo_rodic[]" %></td>
-            <td><%= text_field_tag "email[]", nil , :required => true %></td>
+            <td><%= text_field_tag "email[]", nil, :required => true %></td>
           </tr>
       <% end %>
       </tbody>
 
     </table>
     <br>
-    <div class="ui grid container">
-      <div class="left aligned two wide column">
-        <%= submit_tag "Uložiť", class: 'ui green button' %>
-      </div>
-      <div class="left aligned two wide column">
-        <%= submit_tag "Pridať riadok", class: 'ui orange button' %>
-      </div>
-    </div>
+    <%= submit_tag "Uložiť", class: 'ui green button' %>
+    <a id="add_row" class="ui orange button">Pridať riadok</a>
+    <a id='delete_row' class="ui red button">Vymazať riadok</a>
 
 <% end %>
